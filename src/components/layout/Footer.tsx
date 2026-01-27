@@ -1,10 +1,19 @@
 import { Link } from "react-router-dom";
-import { Shield, Mail, Phone, MapPin, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import {
+  Shield,
+  Mail,
+  Phone,
+  MapPin,
+  Facebook,
+  Twitter,
+  Linkedin,
+  Instagram,
+} from "lucide-react";
 
 const Footer = () => {
   return (
-    <footer className="section-dark text-primary-foreground">
-      <div className="container mx-auto px-4 py-16">
+    <footer className="section-dark text-primary-foreground overflow-hidden">
+      <div className="container mx-auto px-4 py-16 pb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
           {/* Brand */}
           <div className="space-y-6">
@@ -12,10 +21,13 @@ const Footer = () => {
               <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center transition-all duration-300 group-hover:bg-primary/30">
                 <Shield className="w-6 h-6 text-primary" />
               </div>
-              <span className="text-2xl font-serif font-bold text-primary-foreground">OGSSI</span>
+              <span className="text-2xl font-serif font-bold text-primary-foreground">
+                CGSOI
+              </span>
             </Link>
             <p className="text-primary-foreground/70 leading-relaxed">
-              The Obstetric and Gynaecological Society of Southern India - Advancing women's healthcare since 1934.
+              The Obstetric and Gynaecological Society of Southern India -
+              Advancing women's healthcare since 1934.
             </p>
             <div className="flex gap-4">
               {[Facebook, Twitter, Linkedin, Instagram].map((Icon, index) => (
@@ -34,10 +46,21 @@ const Footer = () => {
           <div>
             <h4 className="text-lg font-serif font-bold mb-6">Quick Links</h4>
             <ul className="space-y-3">
-              {["Home", "About Us", "Events", "Team", "Programs", "Contact"].map((item) => (
+              {[
+                "Home",
+                "About Us",
+                "Events",
+                "Team",
+                "Programs",
+                "Contact",
+              ].map((item) => (
                 <li key={item}>
                   <Link
-                    to={item === "Home" ? "/" : `/${item.toLowerCase().replace(" ", "-")}`}
+                    to={
+                      item === "Home"
+                        ? "/"
+                        : `/${item.toLowerCase().replace(" ", "-")}`
+                    }
                     className="text-primary-foreground/70 hover:text-primary transition-colors duration-300"
                   >
                     {item}
@@ -102,16 +125,31 @@ const Footer = () => {
           </div>
         </div>
 
+        {/* --- LARGE BRAND TEXT SECTION --- */}
+        <div className="mt-16 select-none pointer-events-none">
+          <h2 className="text-[15vw] md:text-[20vw] leading-none font-bold text-primary-foreground/[0.05] text-center tracking-tighter">
+            CGSOI
+          </h2>
+        </div>
+        {/* --------------------------------- */}
+
         {/* Bottom Bar */}
-        <div className="border-t border-primary-foreground/10 mt-12 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+        <div className="border-t border-primary-foreground/10 mt-4 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-primary-foreground/60 text-sm">
-            © {new Date().getFullYear()} OGSSI. All rights reserved.
+            © {new Date().getFullYear()} COSMETIC GYNECOLOGY SOCIETY OF INDIA.
+            All rights reserved.
           </p>
           <div className="flex gap-6 text-sm">
-            <a href="#" className="text-primary-foreground/60 hover:text-primary transition-colors">
+            <a
+              href="#"
+              className="text-primary-foreground/60 hover:text-primary transition-colors"
+            >
               Privacy Policy
             </a>
-            <a href="#" className="text-primary-foreground/60 hover:text-primary transition-colors">
+            <a
+              href="#"
+              className="text-primary-foreground/60 hover:text-primary transition-colors"
+            >
               Terms of Service
             </a>
           </div>

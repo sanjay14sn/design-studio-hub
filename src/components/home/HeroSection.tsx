@@ -1,99 +1,221 @@
+import React from "react";
 import { Link } from "react-router-dom";
-import { ArrowRight, Calendar, Users, Award } from "lucide-react";
+import { ArrowRight, Sparkles, Activity, ShieldCheck } from "lucide-react";
 
 const HeroSection = () => {
-  return (
-    <section className="relative min-h-[90vh] flex items-center overflow-hidden">
-      {/* Background Elements */}
-      <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-primary/5" />
-      
-      {/* Floating Shapes */}
-      <div className="floating-shape w-72 h-72 -top-20 -right-20 blur-3xl" />
-      <div className="floating-shape w-96 h-96 -bottom-32 -left-32 blur-3xl animate-float-delayed" />
-      <div className="floating-shape w-48 h-48 top-1/3 right-1/4 blur-2xl animate-float" />
+  // Official Brand Palette
+  const brand = {
+    royalBlue: "#2436A8",
+    softWhite: "#FAFAFD",
+    softLavender: "#C6B7E2",
+    blushPink: "#F4A7B9",
+    textDarkBlue: "#1E245C",
+  };
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
-          {/* Content */}
-          <div className="space-y-8 animate-slide-up">
-            <div className="section-badge">
-              <Award className="w-4 h-4" />
-              <span>Established 1934</span>
+  return (
+    <section
+      className="relative min-h-[95vh] flex items-center overflow-hidden font-sans bg-cover bg-center"
+      style={{
+        backgroundImage: `
+          linear-gradient(
+            135deg,
+            ${brand.softWhite}ee 35%,
+            ${brand.softLavender}66 100%
+          ),
+          url("https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=1600&q=80")
+        `,
+      }}
+    >
+      {/* Floating Animation Styles */}
+      <style>
+        {`
+          @keyframes float {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+            100% { transform: translateY(0px); }
+          }
+          .animate-float { animation: float 6s ease-in-out infinite; }
+          .animate-float-delayed { animation: float 6s ease-in-out 2s infinite; }
+        `}
+      </style>
+
+      {/* Optional Soft Glow */}
+      <div
+        className="absolute -top-[10%] -right-[5%] w-[600px] h-[600px] rounded-full blur-[120px] opacity-20"
+        style={{ backgroundColor: brand.softLavender }}
+      />
+
+      {/* ================= CONTENT ================= */}
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid lg:grid-cols-12 gap-12 items-center">
+
+          {/* LEFT COLUMN */}
+          <div className="lg:col-span-7 space-y-8">
+
+            {/* Trust Badge */}
+            <div
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full border backdrop-blur-sm"
+              style={{
+                backgroundColor: `${brand.royalBlue}10`,
+                borderColor: `${brand.royalBlue}30`,
+                color: brand.royalBlue,
+              }}
+            >
+              <ShieldCheck className="w-4 h-4" />
+              <span className="text-xs font-bold uppercase tracking-widest">
+                90 Years of Clinical Excellence
+              </span>
             </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold leading-tight">
-              Advancing{" "}
-              <span className="gradient-text">Women's Healthcare</span>{" "}
-              in Southern India
+
+            {/* Heading */}
+            <h1
+              className="text-5xl md:text-7xl font-bold leading-[1.1]"
+              style={{ color: brand.royalBlue }}
+            >
+              Advancing <br />
+              <span className="italic font-serif opacity-90">Women's</span> Health
+              <br />
+              <span
+                className="text-4xl md:text-5xl block mt-2 opacity-80"
+                style={{ color: brand.textDarkBlue }}
+              >
+                In Southern India
+              </span>
             </h1>
-            
-            <p className="text-lg text-muted-foreground max-w-xl leading-relaxed">
-              The Obstetric and Gynaecological Society of Southern India is committed to 
-              promoting safe motherhood, advancing maternal care, and empowering medical 
-              professionals through continuous education.
+
+            {/* Description */}
+            <p
+              className="text-lg md:text-xl max-w-xl leading-relaxed"
+              style={{ color: brand.textDarkBlue }}
+            >
+              COSMETIC GYNECOLOGY SOCIETY OF INDIA is the cornerstone of maternal
+              excellence, uniting thousands of professionals to shape the future
+              of healthcare.
             </p>
 
-            <div className="flex flex-wrap gap-4">
-              <Link to="/about" className="btn-primary-gradient inline-flex items-center gap-2">
-                Discover More
-                <ArrowRight className="w-5 h-5" />
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 pt-4">
+              <Link
+                to="/membership"
+                className="group px-8 py-4 rounded-full flex items-center justify-center gap-3 transition-all hover:brightness-110 shadow-lg shadow-pink-200 text-white"
+                style={{ backgroundColor: brand.blushPink }}
+              >
+                <span className="font-bold">Join the Legacy</span>
+                <Sparkles className="w-5 h-5 group-hover:rotate-12 transition-transform" />
               </Link>
-              <Link to="/events" className="btn-outline-hover">
-                View Events
+
+              <Link
+                to="/events"
+                className="px-8 py-4 rounded-full border-2 bg-white/60 backdrop-blur-md font-bold transition-all hover:bg-white flex items-center justify-center gap-2"
+                style={{
+                  borderColor: brand.softLavender,
+                  color: brand.royalBlue,
+                }}
+              >
+                Upcoming Events
+                <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
 
-            {/* Stats Mini */}
-            <div className="flex flex-wrap gap-8 pt-8 border-t border-border">
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center">
-                  <Calendar className="w-5 h-5 text-primary-foreground" />
-                </div>
-                <div>
-                  <div className="text-2xl font-serif font-bold">90+</div>
-                  <div className="text-sm text-muted-foreground">Years of Excellence</div>
-                </div>
+            {/* Stats */}
+            <div
+              className="grid grid-cols-3 gap-4 p-8 rounded-3xl mt-12"
+              style={{ backgroundColor: `${brand.softLavender}55` }}
+            >
+              <div>
+                <p className="text-3xl font-bold" style={{ color: brand.royalBlue }}>
+                  90+
+                </p>
+                <p className="text-[10px] uppercase font-bold opacity-60">Years</p>
               </div>
-              <div className="flex items-center gap-3">
-                <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center">
-                  <Users className="w-5 h-5 text-primary-foreground" />
-                </div>
-                <div>
-                  <div className="text-2xl font-serif font-bold">5000+</div>
-                  <div className="text-sm text-muted-foreground">Active Members</div>
-                </div>
+              <div
+                className="border-x px-4"
+                style={{ borderColor: `${brand.royalBlue}20` }}
+              >
+                <p className="text-3xl font-bold" style={{ color: brand.royalBlue }}>
+                  5k+
+                </p>
+                <p className="text-[10px] uppercase font-bold opacity-60">
+                  Members
+                </p>
+              </div>
+              <div className="pl-4">
+                <p className="text-3xl font-bold" style={{ color: brand.royalBlue }}>
+                  24/7
+                </p>
+                <p className="text-[10px] uppercase font-bold opacity-60">
+                  Support
+                </p>
               </div>
             </div>
           </div>
 
-          {/* Hero Image/Visual */}
-          <div className="relative animate-fade-in">
-            <div className="relative z-10">
-              <div className="aspect-square max-w-lg mx-auto rounded-3xl overflow-hidden shadow-2xl">
+          {/* RIGHT COLUMN */}
+          <div className="lg:col-span-5 relative mt-12 lg:mt-0">
+            <div className="relative">
+
+              {/* Image */}
+              <div
+                className="relative rounded-[3rem] overflow-hidden aspect-[4/5] shadow-2xl border-8"
+                style={{ borderColor: brand.softWhite }}
+              >
                 <img
-                  src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?auto=format&fit=crop&w=800&q=80"
-                  alt="Healthcare professionals"
+                  src="https://images.unsplash.com/photo-1551601651-2a8555f1a136?auto=format&fit=crop&w=1000&q=80"
+                  alt="Professional Care"
                   className="w-full h-full object-cover"
                 />
               </div>
-              
-              {/* Floating Card */}
-              <div className="absolute -bottom-6 -left-6 bg-card rounded-2xl p-6 shadow-xl border border-border animate-float">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 rounded-full gradient-bg-secondary flex items-center justify-center">
-                    <Award className="w-7 h-7 text-secondary-foreground" />
-                  </div>
-                  <div>
-                    <div className="font-serif font-bold text-lg">Trusted Since</div>
-                    <div className="text-muted-foreground">1934</div>
-                  </div>
+
+              {/* Live Badge */}
+              <div
+                className="absolute -top-6 -right-4 bg-white p-4 rounded-2xl shadow-xl border animate-float"
+                style={{ borderColor: brand.softLavender }}
+              >
+                <div className="flex items-center gap-3">
+                  <span className="flex h-3 w-3 relative">
+                    <span
+                      className="animate-ping absolute inline-flex h-full w-full rounded-full opacity-75"
+                      style={{ backgroundColor: brand.blushPink }}
+                    />
+                    <span
+                      className="relative inline-flex rounded-full h-3 w-3"
+                      style={{ backgroundColor: brand.blushPink }}
+                    />
+                  </span>
+                  <span
+                    className="text-sm font-bold"
+                    style={{ color: brand.royalBlue }}
+                  >
+                    CME Live Today
+                  </span>
                 </div>
               </div>
-            </div>
 
-            {/* Background Decoration */}
-            <div className="absolute inset-0 rounded-3xl gradient-bg opacity-20 transform rotate-6 scale-105" />
+              {/* Info Card */}
+              <div
+                className="absolute -bottom-8 -left-8 bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-xl border animate-float-delayed max-w-[220px]"
+                style={{ borderColor: brand.softLavender }}
+              >
+                <div
+                  className="w-10 h-10 rounded-lg flex items-center justify-center mb-4"
+                  style={{ backgroundColor: `${brand.blushPink}30` }}
+                >
+                  <Activity
+                    className="w-6 h-6"
+                    style={{ color: brand.royalBlue }}
+                  />
+                </div>
+                <p
+                  className="text-sm font-semibold leading-snug"
+                  style={{ color: brand.textDarkBlue }}
+                >
+                  Promoting Safe Motherhood across the region.
+                </p>
+              </div>
+
+            </div>
           </div>
+
         </div>
       </div>
     </section>

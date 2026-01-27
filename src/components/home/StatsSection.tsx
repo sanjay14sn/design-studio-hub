@@ -1,15 +1,23 @@
-import { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from "react";
 
 const stats = [
-  { value: 1934, label: "Established in", suffix: "" },
-  { value: 5000, label: "Members Leading", suffix: "+" },
-  { value: 10000, label: "Professionals Trained", suffix: "+" },
-  { value: 90, label: "Years of Excellence", suffix: "+" },
+  { value: 1934, label: "Founded in", suffix: "" },
+  { value: 5000, label: "Active Members", suffix: "+" },
+  { value: 10000, label: "Doctors Trained", suffix: "+" },
+  { value: 91, label: "Legacy Years", suffix: "+" },
 ];
 
 const StatsSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const sectionRef = useRef<HTMLDivElement>(null);
+  const sectionRef = useRef(null);
+
+  const brand = {
+    royalBlue: "#2436A8",
+    softWhite: "#FAFAFD",
+    softLavender: "#C6B7E2",
+    blushPink: "#F4A7B9",
+    textDarkBlue: "#1E245C",
+  };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -29,26 +37,55 @@ const StatsSection = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-24 bg-muted/30 relative overflow-hidden">
-      {/* Background Decoration */}
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] rounded-full gradient-bg" />
-      </div>
+    <section 
+      ref={sectionRef} 
+      className="py-24 relative overflow-hidden"
+      style={{ backgroundColor: brand.softWhite }}
+    >
+      {/* Background Decoration - 15% Soft Lavender */}
+      <div 
+        className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full blur-[140px] opacity-20 pointer-events-none"
+        style={{ backgroundColor: brand.softLavender }} 
+      />
 
-      <div className="container mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
           {stats.map((stat, index) => (
             <div
               key={index}
-              className="stats-item"
-              style={{ animationDelay: `${index * 150}ms` }}
+              className={`text-center transition-all duration-1000 transform ${
+                isVisible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+              }`}
+              style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <CountUp
-                end={stat.value}
-                suffix={stat.suffix}
-                isVisible={isVisible}
+              {/* Decorative Dot - 5% Blush Pink */}
+              <div 
+                className="w-2 h-2 rounded-full mx-auto mb-4" 
+                style={{ backgroundColor: brand.blushPink }}
               />
-              <div className="text-muted-foreground mt-2">{stat.label}</div>
+
+              <div className="relative inline-block">
+                <CountUp
+                  end={stat.value}
+                  suffix={stat.suffix}
+                  isVisible={isVisible}
+                  color={brand.royalBlue}
+                  suffixColor={brand.blushPink}
+                />
+              </div>
+              
+              <p 
+                className="text-xs uppercase tracking-[0.2em] font-bold mt-4 opacity-70"
+                style={{ color: brand.textDarkBlue }}
+              >
+                {stat.label}
+              </p>
+
+              {/* Mobile/Tablet Divider */}
+              <div 
+                className="w-12 h-[2px] mx-auto mt-6 lg:hidden" 
+                style={{ backgroundColor: `${brand.softLavender}60` }}
+              />
             </div>
           ))}
         </div>
@@ -57,13 +94,7 @@ const StatsSection = () => {
   );
 };
 
-interface CountUpProps {
-  end: number;
-  suffix: string;
-  isVisible: boolean;
-}
-
-const CountUp = ({ end, suffix, isVisible }: CountUpProps) => {
+const CountUp = ({ end, suffix, isVisible, color, suffixColor }) => {
   const [count, setCount] = useState(0);
 
   useEffect(() => {
@@ -88,8 +119,12 @@ const CountUp = ({ end, suffix, isVisible }: CountUpProps) => {
   }, [end, isVisible]);
 
   return (
-    <span className="stats-number">
-      {count.toLocaleString()}{suffix}
+    <span 
+      className="text-5xl md:text-6xl font-serif font-bold tracking-tight"
+      style={{ color: color }}
+    >
+      {count.toLocaleString()}
+      <span style={{ color: suffixColor }}>{suffix}</span>
     </span>
   );
 };

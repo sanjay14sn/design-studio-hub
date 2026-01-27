@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, Shield } from "lucide-react";
 
@@ -6,73 +6,123 @@ const navItems = [
   { name: "Home", path: "/" },
   { name: "About", path: "/about" },
   { name: "Events", path: "/events" },
-  { name: "Team", path: "/team" },
+  { name: "Leadership", path: "/team" },
   { name: "Programs", path: "/programs" },
-  { name: "Contact", path: "/contact" },
 ];
 
 const Header = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
   const location = useLocation();
 
+  const brand = {
+    royalBlue: "#2436A8",
+    softWhite: "#FAFAFD",
+    softLavender: "#C6B7E2",
+    blushPink: "#F4A7B9",
+    textDarkBlue: "#1E245C",
+  };
+
+  // Handle scroll effect for glassmorphism
+  useEffect(() => {
+    const handleScroll = () => setScrolled(window.scrollY > 20);
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
-      <div className="container mx-auto px-4">
-        <div className="flex items-center justify-between h-20">
-          {/* Logo */}
+    <header 
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        scrolled ? "py-3 shadow-lg" : "py-5"
+      }`}
+      style={{ 
+        backgroundColor: scrolled ? "rgba(250, 250, 253, 0.95)" : "transparent",
+        backdropFilter: scrolled ? "blur(10px)" : "none",
+        borderBottom: scrolled ? `1px solid ${brand.softLavender}40` : "1px solid transparent"
+      }}
+    >
+      <div className="container mx-auto px-6">
+        <div className="flex items-center justify-between">
+          
+          {/* ================= LOGO ================= */}
           <Link to="/" className="flex items-center gap-3 group">
-            <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center transition-transform duration-300 group-hover:scale-110">
-              <Shield className="w-6 h-6 text-primary-foreground" />
+            <div 
+              className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center transition-transform duration-500 group-hover:rotate-[360deg]"
+              style={{ backgroundColor: brand.royalBlue }}
+            >
+              <Shield className="w-5 h-5 md:w-6 md:h-6 text-white" />
             </div>
-            <span className="text-2xl font-serif font-bold gradient-text">OGSSI</span>
+            <div className="flex flex-col">
+              <span className="text-xl md:text-2xl font-serif font-bold tracking-tight" style={{ color: brand.royalBlue }}>
+                CGSOI
+              </span>
+              <span className="text-[10px] font-bold uppercase tracking-[0.2em] opacity-60" style={{ color: brand.textDarkBlue }}>
+                Est. 1934
+              </span>
+            </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <nav className="hidden md:flex items-center gap-8">
-            {navItems.map((item) => (
-              <Link
-                key={item.name}
-                to={item.path}
-                className={`nav-link py-2 ${
-                  location.pathname === item.path ? "active" : ""
-                }`}
-              >
-                {item.name}
-              </Link>
-            ))}
+          {/* ================= DESKTOP NAV ================= */}
+          <nav className="hidden lg:flex items-center gap-10">
+            {navItems.map((item) => {
+              const isActive = location.pathname === item.path;
+              return (
+                <Link
+                  key={item.name}
+                  to={item.path}
+                  className="relative text-sm font-bold uppercase tracking-widest transition-colors duration-300 py-2 group"
+                  style={{ color: isActive ? brand.royalBlue : brand.textDarkBlue }}
+                >
+                  {item.name}
+                  {/* Hover/Active Underline - 5% Pink */}
+                  <span 
+                    className={`absolute bottom-0 left-0 h-[2px] transition-all duration-300 ${
+                      isActive ? "w-full" : "w-0 group-hover:w-full"
+                    }`}
+                    style={{ backgroundColor: brand.blushPink }}
+                  />
+                </Link>
+              );
+            })}
           </nav>
 
-          {/* CTA Button */}
-          <div className="hidden md:block">
-            <Link to="/contact" className="btn-primary-gradient">
-              Join Us
+          {/* ================= CTA BUTTON ================= */}
+          <div className="hidden lg:block">
+            <Link 
+              to="/contact" 
+              className="px-8 py-3 rounded-full text-white font-bold text-sm transition-all hover:scale-105 shadow-md"
+              style={{ 
+                backgroundColor: brand.royalBlue,
+                boxShadow: `0 4px 14px 0 ${brand.royalBlue}40`
+              }}
+            >
+              Join the Society
             </Link>
           </div>
 
-          {/* Mobile Menu Button */}
+          {/* ================= MOBILE TOGGLE ================= */}
           <button
-            className="md:hidden p-2 rounded-lg hover:bg-muted transition-colors"
+            className="lg:hidden p-2 rounded-xl transition-colors"
+            style={{ color: brand.royalBlue, backgroundColor: `${brand.softLavender}30` }}
             onClick={() => setIsMenuOpen(!isMenuOpen)}
           >
-            {isMenuOpen ? (
-              <X className="w-6 h-6" />
-            ) : (
-              <Menu className="w-6 h-6" />
-            )}
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
 
-        {/* Mobile Navigation */}
+        {/* ================= MOBILE MENU ================= */}
         {isMenuOpen && (
-          <nav className="md:hidden py-4 border-t border-border animate-fade-in">
-            <div className="flex flex-col gap-4">
+          <div 
+            className="lg:hidden absolute top-full left-0 right-0 p-6 shadow-2xl animate-in slide-in-from-top duration-300"
+            style={{ backgroundColor: brand.softWhite }}
+          >
+            <div className="flex flex-col gap-6">
               {navItems.map((item) => (
                 <Link
                   key={item.name}
                   to={item.path}
-                  className={`nav-link py-2 ${
-                    location.pathname === item.path ? "active" : ""
-                  }`}
+                  className="text-lg font-serif font-bold"
+                  style={{ color: location.pathname === item.path ? brand.blushPink : brand.royalBlue }}
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
@@ -80,13 +130,14 @@ const Header = () => {
               ))}
               <Link
                 to="/contact"
-                className="btn-primary-gradient text-center mt-4"
+                className="w-full py-4 rounded-2xl text-center text-white font-bold"
+                style={{ backgroundColor: brand.blushPink }}
                 onClick={() => setIsMenuOpen(false)}
               >
-                Join Us
+                Become a Member
               </Link>
             </div>
-          </nav>
+          </div>
         )}
       </div>
     </header>
