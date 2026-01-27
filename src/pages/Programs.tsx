@@ -61,8 +61,8 @@ const Programs = () => {
       </section>
 
       {/* Monthly Programs */}
-      <section className="py-20 bg-[#FAFAFD]">
-        <div className="container mx-auto px-4">
+      <section className="py-0 bg-[#FAFAFD]">
+        <div className="container mx-auto px-2">
           <h2 className="text-3xl font-serif font-bold text-center text-[#1E245C] mb-12">
             Monthly <span className="text-[#2436A8]">Programs</span>
           </h2>

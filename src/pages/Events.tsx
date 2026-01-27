@@ -1,8 +1,46 @@
 import React from "react";
 import Layout from "@/components/layout/Layout";
-import { Shield, Calendar, MapPin, ArrowRight, Info, Clock, Award, History } from "lucide-react";
+import { Shield, Calendar, MapPin, ArrowRight, Info } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+
+// --- Decorative SVG Component (Ported from your source) ---
+const AnimatedBackgroundSVG = () => (
+  <div className="absolute inset-0 pointer-events-none overflow-hidden opacity-30">
+    {/* Top Arrow Animation */}
+    <div className="absolute top-0 left-[-5em] z-0 hidden lg:block">
+      <svg xmlns="http://www.w3.org/2000/svg" width="270.11" height="649.9" overflow="visible">
+        <style>{`
+          .geo-arrow { fill: none; stroke: #2436A8; stroke-width: 2; stroke-miterlimit: 10 }
+          .draw-in { stroke-dasharray: 1000; stroke-dashoffset: 10; animation: draw 15s ease-in-out alternate infinite; }
+          @keyframes draw { from { stroke-dashoffset: 1000; } to { stroke-dashoffset: 0; } }
+          .bounce-1 { animation: bounce-1 10s infinite ease; transform-origin: bottom; }
+          .bounce-2 { animation: bounce-2 10s infinite ease; transform-origin: bottom; }
+          .bounce-3 { animation: bounce-3 10s infinite ease; transform-origin: bottom; }
+          @keyframes bounce-1 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(50px); } }
+          @keyframes bounce-2 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-30px); } }
+          @keyframes bounce-3 { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(30px); } }
+        `}</style>
+        <g className="bounce-1">
+          <path className="geo-arrow draw-in" d="M135.06 142.564L267.995 275.5 135.06 408.434 2.125 275.499z" />
+        </g>
+        <circle className="geo-arrow bounce-2" cx="194.65" cy="69.54" r="7.96" />
+        <circle className="geo-arrow draw-in" cx="194.65" cy="39.5" r="7.96" />
+        <circle className="geo-arrow bounce-3" cx="194.65" cy="9.46" r="7.96" />
+        <g className="geo-arrow bounce-2">
+          <path className="draw-in" d="M181.21 619.5l13.27 27 13.27-27zM194.48 644.5v-552" />
+        </g>
+      </svg>
+    </div>
+
+    {/* Dotted Circle Animation */}
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+        <svg xmlns="http://www.w3.org/2000/svg" className="animate-[spin_38s_linear_infinite]" width="352" height="352" overflow="visible">
+          <circle cx="176" cy="176" r="174" fill="none" stroke="#C6B7E2" strokeWidth="2" strokeMiterlimit="10" strokeDasharray="12.921,11.9271"/>
+        </svg>
+    </div>
+  </div>
+);
 
 const upcomingEvents = [
   {
@@ -43,42 +81,9 @@ const upcomingEvents = [
   },
 ];
 
-const pastEvents = [
-  {
-    id: "p1",
-    year: "2024",
-    title: "Annual Global Summit",
-    summary: "Over 500 delegates participated in the 2024 summit.",
-    icon: <Award className="w-5 h-5" />
-  },
-  {
-    id: "p2",
-    year: "2023",
-    title: "Maternal Health Drive",
-    summary: "Successfully reached 10+ rural districts for screening.",
-    icon: <History className="w-5 h-5" />
-  },
-  {
-    id: "p3",
-    year: "2023",
-    title: "Digital Health Expo",
-    summary: "Exploring the future of AI in gynecological diagnostics.",
-    icon: <Clock className="w-5 h-5" />
-  },
-  {
-    id: "p4",
-    year: "2022",
-    title: "Silver Jubilee Celebration",
-    summary: "Marking 25 years of excellence in medical training.",
-    icon: <Shield className="w-5 h-5" />
-  }
-];
-
-// Set this to false to see the empty state
 const hasEvents = true; 
 
 const Events = () => {
-  // Animation Variants
   const fadeInUp = {
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
@@ -91,10 +96,14 @@ const Events = () => {
 
   return (
     <Layout>
-      {/* Hero Section - Using Soft White & Lavender Background */}
+      {/* Hero Section */}
       <section className="py-24 relative overflow-hidden bg-[#FAFAFD]">
+        {/* Glow Effects */}
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#C6B7E2] opacity-20 blur-[120px] rounded-full" />
         <div className="absolute bottom-0 left-0 w-72 h-72 bg-[#F4A7B9] opacity-10 blur-[100px] rounded-full" />
+        
+        {/* Background SVG Animations */}
+        <AnimatedBackgroundSVG />
         
         <div className="container mx-auto px-4 relative z-10">
           <motion.div 
@@ -117,8 +126,8 @@ const Events = () => {
         </div>
       </section>
 
-      {/* Conditional Rendering Logic */}
-      <section className="py-16 bg-[#C6B7E2]/10 min-h-[400px]">
+      {/* Main Events Grid */}
+      <section className="py-16 bg-[#C6B7E2]/10 min-h-[400px] relative">
         <div className="container mx-auto px-4">
           <AnimatePresence mode="wait">
             {hasEvents ? (
@@ -144,7 +153,7 @@ const Events = () => {
                       />
                     </div>
                     <div className="p-8 md:w-2/3 flex flex-col justify-center">
-                      <span className="inline-block px-3 py-1 rounded-lg text-xs font-bold bg-[#F4A7B9]/20 text-[#2436A8] mb-4 w-fit">
+                      <span className="inline-block px-3 py-1 rounded-lg text-xs font-bold bg-[#F4A7B9]/20 text-[#2436A8] mb-4 w-fit uppercase tracking-tighter">
                         {event.type}
                       </span>
                       <h3 className="text-2xl font-serif font-bold mb-3 text-[#1E245C] group-hover:text-[#2436A8] transition-colors">
@@ -153,13 +162,13 @@ const Events = () => {
                       <p className="text-muted-foreground text-sm mb-6 leading-relaxed">
                         {event.description}
                       </p>
-                      <div className="flex flex-wrap gap-5 text-sm font-medium">
+                      <div className="flex flex-wrap gap-5 text-sm font-medium mt-auto">
                         <span className="flex items-center gap-2 text-[#2436A8]">
-                          <Calendar className="w-4 h-4" />
+                          <Calendar className="w-4 h-4 text-[#F4A7B9]" />
                           {event.date}
                         </span>
                         <span className="flex items-center gap-2 text-[#2436A8]">
-                          <MapPin className="w-4 h-4" />
+                          <MapPin className="w-4 h-4 text-[#F4A7B9]" />
                           {event.location}
                         </span>
                       </div>
@@ -168,7 +177,6 @@ const Events = () => {
                 ))}
               </motion.div>
             ) : (
-              /* No Events - Lottie State */
               <motion.div 
                 key="no-events"
                 initial={{ opacity: 0, scale: 0.9 }}
@@ -195,62 +203,33 @@ const Events = () => {
         </div>
       </section>
 
-      {/* Past Events Section - Enhanced Container */}
-      <section className="py-24 bg-white relative overflow-hidden">
-        {/* Decorative background element */}
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-[radial-gradient(#C6B7E2_0.5px,transparent_0.5px)] [background-size:24px_24px] opacity-20" />
-
-        <div className="container mx-auto px-4 relative z-10">
-          <div className="flex items-end justify-between mb-12">
-            <div className="max-w-2xl">
-              <h2 className="text-4xl font-serif font-bold text-[#1E245C] mb-4">
-                Legacy <span className="text-[#2436A8]">& Past Milestones</span>
-              </h2>
-              <div className="w-24 h-1.5 bg-[#F4A7B9] rounded-full mb-6" />
-              <p className="text-muted-foreground">
-                Reflecting on our journey and the significant milestones that have shaped our community over the years.
-              </p>
-            </div>
-            <div className="hidden lg:block">
-               <History className="w-16 h-16 text-[#C6B7E2] opacity-40" />
-            </div>
+      {/* Past Events Section */}
+      <section className="py-24 bg-white relative">
+        <div className="container mx-auto px-4">
+          <div className="flex items-center justify-between mb-12">
+            <h2 className="text-3xl font-serif font-bold text-[#1E245C] border-l-4 border-[#F4A7B9] pl-4">
+              Legacy <span className="text-[#2436A8]">& Past Milestones</span>
+            </h2>
           </div>
           
-          <motion.div 
-            variants={staggerContainer}
-            initial="initial"
-            whileInView="animate"
-            viewport={{ once: true }}
-            className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
-          >
-            {pastEvents.map((item) => (
-              <motion.div
-                key={item.id}
-                variants={fadeInUp}
-                className="relative group cursor-default"
+          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[1, 2, 3, 4].map((item) => (
+              <motion.div 
+                key={item}
+                whileHover={{ y: -5 }}
+                className="p-6 rounded-2xl bg-[#FAFAFD] border border-[#C6B7E2]/20 hover:border-[#F4A7B9]/50 transition-all shadow-sm"
               >
-                <div className="h-full p-8 rounded-3xl bg-white border border-slate-100 shadow-xl shadow-slate-200/50 transition-all duration-300 group-hover:border-[#C6B7E2] group-hover:shadow-2xl group-hover:shadow-[#C6B7E2]/20">
-                  <div className="flex justify-between items-start mb-6">
-                    <div className="p-3 rounded-2xl bg-[#2436A8]/5 text-[#2436A8] group-hover:bg-[#2436A8] group-hover:text-white transition-colors duration-300">
-                      {item.icon}
-                    </div>
-                    <span className="text-3xl font-serif font-black text-slate-200 group-hover:text-[#F4A7B9]/30 transition-colors">
-                      {item.year}
-                    </span>
-                  </div>
-                  <h4 className="text-xl font-bold text-[#1E245C] mb-3">{item.title}</h4>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    {item.summary}
-                  </p>
-                  
-                  {/* Subtle Arrow Decor */}
-                  <div className="mt-6 flex items-center text-[#2436A8] font-semibold text-xs uppercase tracking-widest opacity-0 group-hover:opacity-100 transition-opacity">
-                    View Archive <ArrowRight className="ml-2 w-3 h-3" />
-                  </div>
+                <div className="w-12 h-12 rounded-full bg-[#2436A8]/5 flex items-center justify-center mb-4 text-[#2436A8]">
+                  <Info className="w-5 h-5" />
                 </div>
+                <h4 className="font-bold text-[#1E245C] mb-2">Annual Meet {2024 - item}</h4>
+                <p className="text-sm text-muted-foreground mb-4">Successful completion of the regional medical symposium.</p>
+                <button className="text-sm font-bold text-[#2436A8] flex items-center gap-2 hover:text-[#F4A7B9] transition-colors">
+                  View Gallery <ArrowRight className="w-4 h-4" />
+                </button>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </section>
     </Layout>
