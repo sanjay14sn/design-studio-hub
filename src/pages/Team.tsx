@@ -97,10 +97,12 @@ const Team = () => {
           backgroundImage: `
             linear-gradient(
               to bottom,
-              rgba(250,250,253,0.94),
-              rgba(250,250,253,0.90)
+           rgba(250,250,253,0.70),
+rgba(250,250,253,0.60)
+
+
             ),
-            url("https://images.unsplash.com/photo-1587502537745-84b86da1204f?auto=format&fit=crop&w=1600&q=80")
+            url("/growth.png")
           `,
         }}
       >
