@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { FadeIn } from "@/components/ui/animations";
 import Layout from "@/components/layout/Layout";
 import HeroSection from "@/components/home/HeroSection";
 import EventsSection from "@/components/home/EventsSection";
@@ -11,6 +12,8 @@ import TeamSection from "@/components/home/TeamSection";
 import StatsSection from "@/components/home/StatsSection";
 import ProgramsSection from "@/components/home/ProgramsSection";
 import PreviousEvents from "@/components/home/PreviousEvents";
+import ScrollToTop from "@/components/ui/ScrollToTop";
+import GynecologySection from "@/components/home/GynecologySection";
 
 const SplashScreen = () => (
   <motion.div
@@ -20,7 +23,7 @@ const SplashScreen = () => (
       scale: 1.05,
       transition: { duration: 0.5, ease: "easeInOut" },
     }}
-    className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-[#FAFAFD]"
+    className="fixed inset-0 z-[9999] flex flex-col items-center justify-center bg-background"
   >
     <div className="relative z-10 flex flex-col items-center">
       <motion.div
@@ -39,8 +42,8 @@ const SplashScreen = () => (
         />
       </motion.div>
 
-      <h2 className="text-2xl font-serif font-bold text-[#1E245C]">
-        OGS<span className="text-[#2436A8]">CHENNAI</span>
+      <h2 className="text-2xl font-serif font-bold text-primary">
+        OGS<span className="text-accent">CHENNAI</span>
       </h2>
       <p className="text-[10px] text-muted-foreground font-semibold uppercase tracking-[0.3em] mt-2">
         Academic Excellence
@@ -58,7 +61,7 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="bg-[#FAFAFD] min-h-screen">
+    <div className="bg-background min-h-screen">
       <AnimatePresence mode="wait">
         {loading && <SplashScreen key="loader" />}
       </AnimatePresence>
@@ -70,17 +73,40 @@ const Index = () => {
           transition={{ duration: 0.5 }}
         >
           <Layout>
-            <HeroSection />
+            <FadeIn>
+              <HeroSection />
+            </FadeIn>
+
             {/* Added a wrapper with z-index to ensure it sits above any layout backgrounds */}
-            <div className="relative z-10">
+            <FadeIn delay={0.2} className="relative z-10">
               <PreviousEvents />
-            </div>
-            <EventsSection />
-            <AboutSection />
-            <PresidentMessage />
-            <StatsSection />
-            <TeamSection />
-            <ProgramsSection />
+            </FadeIn>
+
+            <FadeIn delay={0.3}>
+              <EventsSection />
+            </FadeIn>
+
+            <FadeIn delay={0.4}>
+              <AboutSection />
+            </FadeIn>
+
+            <FadeIn delay={0.5}>
+              <PresidentMessage />
+            </FadeIn>
+
+
+            <FadeIn delay={0.7}>
+              <TeamSection />
+            </FadeIn>
+
+
+
+            <FadeIn delay={0.8}>
+              <ProgramsSection />
+            </FadeIn>
+
+
+            <ScrollToTop />
           </Layout>
         </motion.div>
       )}

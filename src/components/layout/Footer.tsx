@@ -16,7 +16,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 py-10 pb-6">
         {/* Main relative container */}
         <div className="relative flex flex-col justify-center">
-          
+
           {/* --- CENTERED WATERMARK --- */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 select-none pointer-events-none z-0 w-full text-center">
             <h2 className="text-[12vw] leading-none font-bold text-primary-foreground/[0.04] tracking-tighter uppercase">

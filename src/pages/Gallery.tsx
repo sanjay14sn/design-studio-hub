@@ -81,23 +81,23 @@ const GalleryPage = () => {
     <Layout>
       <div ref={containerRef}>
         {/* ================= HERO ================= */}
-        <section className="relative min-h-[85vh] flex items-center bg-[#FAFAFD] overflow-hidden pt-20">
-          <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-[#C6B7E2]/20 rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-[#F4A7B9]/15 rounded-full blur-[120px]" />
+        <section className="relative min-h-[85vh] flex items-center bg-background overflow-hidden pt-20">
+          <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-secondary/20 rounded-full blur-[120px]" />
+          <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-accent/15 rounded-full blur-[120px]" />
 
           <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
             <motion.div initial="hidden" animate="visible" variants={staggerContainer}>
-              <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#2436A8]/5 border border-[#2436A8]/10 text-[#2436A8] mb-8">
-                <Sparkles className="w-4 h-4 text-[#F4A7B9]" />
+              <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary mb-8">
+                <Sparkles className="w-4 h-4 text-accent" />
                 <span className="text-xs font-bold uppercase tracking-widest">Our Visual Legacy</span>
               </motion.div>
 
-              <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-serif font-bold text-[#1E245C] leading-[1.1] mb-8">
+              <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-serif font-bold text-foreground leading-[1.1] mb-8">
                 Keep Up About Your <br />
-                <span className="text-[#2436A8] italic">Health & Fitness</span>
+                <span className="text-primary italic">Health & Fitness</span>
               </motion.h1>
 
-              <motion.p variants={fadeInUp} className="text-lg text-[#1E245C]/60 max-w-md">
+              <motion.p variants={fadeInUp} className="text-lg text-muted-foreground max-w-md">
                 Capturing moments of innovation, community care, and clinical excellence.
               </motion.p>
             </motion.div>
@@ -119,15 +119,15 @@ const GalleryPage = () => {
               <motion.div
                 animate={{ y: [0, -20, 0] }}
                 transition={{ duration: 4, repeat: Infinity }}
-                className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border"
+                className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-secondary"
               >
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-[#2436A8] rounded-full flex items-center justify-center text-white">
+                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
                     <Shield className="w-6 h-6" />
                   </div>
                   <div>
-                    <p className="text-[10px] uppercase font-black text-[#F4A7B9]">Certified Care</p>
-                    <p className="text-[#1E245C] font-bold">Excellence Since 1934</p>
+                    <p className="text-[10px] uppercase font-black text-accent">Certified Care</p>
+                    <p className="text-foreground font-bold">Excellence Since 1934</p>
                   </div>
                 </div>
               </motion.div>
@@ -136,9 +136,9 @@ const GalleryPage = () => {
         </section>
 
         {/* ================= SCROLL TEXT ================= */}
-        <div className="py-7 bg-[#1E245C] overflow-hidden">
+        <div className="py-7 bg-primary overflow-hidden">
           <motion.div style={{ x: xLeft }} className="whitespace-nowrap flex gap-20">
-            {[1, 2, 3,4].map((i) => (
+            {[1, 2, 3, 4].map((i) => (
               <span key={i} className="text-6xl md:text-8xl font-serif font-black text-white/10 uppercase italic">
                 COSMETIC • GYNECOLOGY • SOCIETY OF • INDIA •
               </span>
@@ -147,7 +147,7 @@ const GalleryPage = () => {
         </div>
 
         {/* ================= GALLERY ================= */}
-        <section className="py-32 bg-[#FAFAFD]">
+        <section className="py-32 bg-background">
           <div className="container mx-auto px-6">
             <motion.div
               variants={staggerContainer}
@@ -165,10 +165,10 @@ const GalleryPage = () => {
                       className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
                     />
 
-                    <div className="absolute inset-0 bg-gradient-to-t from-[#2436A8] via-[#2436A8]/40 to-transparent opacity-0 group-hover:opacity-100 transition-all flex items-end p-10">
+                    <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-all flex items-end p-10">
                       <div className="text-white">
                         <h3 className="text-2xl font-serif font-bold mb-4">{item.title}</h3>
-                        <button className="flex items-center gap-2 text-[#F4A7B9] font-bold text-xs uppercase tracking-widest">
+                        <button className="flex items-center gap-2 text-accent font-bold text-xs uppercase tracking-widest">
                           Expand Gallery <ArrowUpRight className="w-4 h-4" />
                         </button>
                       </div>

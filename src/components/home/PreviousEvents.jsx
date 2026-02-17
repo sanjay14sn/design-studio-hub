@@ -50,7 +50,7 @@ const PreviousEvents = () => {
   const rafRef = useRef(null);
   const [isPaused, setIsPaused] = useState(false);
   const [currentIndex, setCurrentIndex] = useState(0);
-  
+
   const itemWidth = 380 + 24; // card width + gap
   const totalItems = events.length;
 
@@ -58,13 +58,13 @@ const PreviousEvents = () => {
   const autoScroll = useCallback(() => {
     if (scrollRef.current && !isPaused) {
       scrollRef.current.scrollLeft += 0.8; // Continuous smooth scroll speed
-      
+
       // Infinite loop logic
       const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
       if (scrollLeft >= scrollWidth * 0.5) { // Halfway through duplicates
         scrollRef.current.scrollLeft = scrollLeft - (itemWidth * totalItems);
       }
-      
+
       rafRef.current = requestAnimationFrame(autoScroll);
     }
   }, [isPaused, itemWidth, totalItems]);
@@ -75,7 +75,7 @@ const PreviousEvents = () => {
   useEffect(() => {
     // Start auto-scroll
     rafRef.current = requestAnimationFrame(autoScroll);
-    
+
     return () => {
       if (rafRef.current) {
         cancelAnimationFrame(rafRef.current);
@@ -106,40 +106,40 @@ const PreviousEvents = () => {
   };
 
   return (
-    <section className="py-20 px-6 bg-[#FAFAFD] relative z-10">
+    <section className="py-20 px-6 bg-background relative z-10">
       <div className="max-w-7xl mx-auto">
         <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
           <div>
             <div className="flex items-center gap-2 mb-2">
-              <div className="h-[2px] w-8 bg-[#F4A7B9]" />
-              <span className="text-[#2436A8] text-xs font-bold tracking-widest uppercase">Archive</span>
+              <div className="h-[2px] w-8 bg-accent" />
+              <span className="text-primary text-xs font-bold tracking-widest uppercase">Archive</span>
             </div>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold text-[#1E245C]">
-              Our <span className="text-[#2436A8]">Previous</span> Events
+            <h2 className="text-3xl md:text-5xl font-serif font-bold text-foreground">
+              Our <span className="text-primary">Previous</span> Events
             </h2>
           </div>
 
           <div className="flex gap-3">
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => scrollToIndex(Math.max(0, currentIndex - 1))}
-              className="p-3 rounded-full border border-[#C6B7E2] text-[#2436A8] hover:bg-white hover:shadow-md transition-all duration-200"
+              className="p-3 rounded-full border border-secondary text-primary hover:bg-white hover:shadow-md transition-all duration-200"
               aria-label="Previous event"
             >
               <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M15 19l-7-7 7-7"/>
+                <path d="M15 19l-7-7 7-7" />
               </svg>
             </motion.button>
-            <motion.button 
+            <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => scrollToIndex(currentIndex + 1)}
-              className="p-3 rounded-full bg-[#2436A8] text-white shadow-md hover:shadow-lg transition-all duration-200"
+              className="p-3 rounded-full bg-primary text-white shadow-md hover:shadow-lg transition-all duration-200"
               aria-label="Next event"
             >
               <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M9 5l7 7-7 7"/>
+                <path d="M9 5l7 7-7 7" />
               </svg>
             </motion.button>
           </div>
@@ -150,9 +150,8 @@ const PreviousEvents = () => {
           {events.map((_, index) => (
             <motion.button
               key={index}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                currentIndex === index ? 'bg-[#2436A8] scale-125 shadow-md' : 'bg-gray-300 hover:bg-gray-400'
-              }`}
+              className={`w-3 h-3 rounded-full transition-all duration-300 ${currentIndex === index ? 'bg-primary scale-125 shadow-md' : 'bg-gray-300 hover:bg-gray-400'
+                }`}
               onClick={() => scrollToIndex(index)}
               whileHover={{ scale: 1.2 }}
               whileTap={{ scale: 0.9 }}
@@ -161,7 +160,7 @@ const PreviousEvents = () => {
           ))}
         </div>
 
-        <div 
+        <div
           ref={scrollRef}
           className="flex gap-6 overflow-hidden" // Changed from overflow-x-auto to overflow-hidden
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
@@ -171,7 +170,7 @@ const PreviousEvents = () => {
           onTouchEnd={handleMouseLeave}
         >
           {infiniteEvents.map((event, index) => (
-            <motion.div 
+            <motion.div
               key={`${event.id}-${index}`}
               className="min-w-[300px] md:min-w-[380px] flex-shrink-0"
               initial={{ opacity: 0.7, scale: 0.95 }}
@@ -179,26 +178,26 @@ const PreviousEvents = () => {
               transition={{ duration: 0.6 }}
               whileHover={{ scale: 1.02, zIndex: 10 }}
             >
-              <div className="group relative h-[480px] rounded-3xl overflow-hidden bg-[#1E245C] shadow-xl hover:shadow-2xl transition-all duration-500 cursor-grab active:cursor-grabbing">
+              <div className="group relative h-[480px] rounded-3xl overflow-hidden bg-muted shadow-xl hover:shadow-2xl transition-all duration-500 cursor-grab active:cursor-grabbing">
                 <img
                   src={event.image}
                   alt={event.title}
                   className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700"
-                  onError={(e) => { 
-                    e.target.src = 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?q=80&w=800'; 
+                  onError={(e) => {
+                    e.target.src = 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?q=80&w=800';
                   }}
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1E245C]/90 via-transparent to-transparent" />
-                
+                <div className="absolute inset-0 bg-gradient-to-t from-muted-foreground/90 via-transparent to-transparent" />
+
                 <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <span className="text-[#F4A7B9] text-[10px] font-bold tracking-tighter uppercase">{event.date}</span>
+                  <span className="text-secondary text-[10px] font-bold tracking-tighter uppercase">{event.date}</span>
                   <h3 className="text-xl md:text-2xl font-bold mt-1 mb-4 leading-tight">{event.title}</h3>
                   {event.description && (
                     <p className="text-sm opacity-90 mb-6 leading-relaxed line-clamp-2">{event.description}</p>
                   )}
                   <a
                     href={event.pdfLink}
-                    className="flex items-center justify-center w-full py-3 bg-white/90 backdrop-blur-sm text-[#1E245C] rounded-xl font-bold text-sm hover:bg-white hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group-hover:translate-y-[-2px]"
+                    className="flex items-center justify-center w-full py-3 bg-white/90 backdrop-blur-sm text-primary rounded-xl font-bold text-sm hover:bg-white hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group-hover:translate-y-[-2px]"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -209,8 +208,50 @@ const PreviousEvents = () => {
             </motion.div>
           ))}
         </div>
+
+        {/* Scroll Down Indicator */}
+        <motion.div
+          className="flex justify-center mt-12"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.5, duration: 0.6 }}
+        >
+          <button
+            onClick={() => {
+              const nextSection = document.querySelector('[data-section="events"]') ||
+                document.querySelector('section:nth-of-type(3)');
+              if (nextSection) {
+                nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+              } else {
+                window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' });
+              }
+            }}
+            className="group flex flex-col items-center gap-2 text-primary hover:text-accent transition-colors duration-300"
+            aria-label="Scroll to next section"
+          >
+            <span className="text-xs font-bold uppercase tracking-widest">Explore More</span>
+            <motion.div
+              animate={{ y: [0, 8, 0] }}
+              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
+              className="p-3 rounded-full border-2 border-current group-hover:bg-primary/5 transition-all"
+            >
+              <svg
+                width="20"
+                height="20"
+                fill="none"
+                stroke="currentColor"
+                strokeWidth="2.5"
+                viewBox="0 0 24 24"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <path d="M12 5v14M19 12l-7 7-7-7" />
+              </svg>
+            </motion.div>
+          </button>
+        </motion.div>
       </div>
-      
+
       <style jsx>{`
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .line-clamp-2 {

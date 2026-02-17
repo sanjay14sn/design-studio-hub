@@ -4,222 +4,215 @@ import {
   Shield,
   Target,
   Eye,
-  Heart,
-  Award,
-  Users,
-  BookOpen,
   ChevronRight,
   Activity,
   Globe,
+  Award,
+  Users,
+  BookOpen
 } from "lucide-react";
 import Layout from "@/components/layout/Layout";
-
-// Color Palette Reference:
-// Primary Royal Blue: #2436A8
-// Blush Pink: #F4A7B9
-// Soft Lavender: #C6B7E2
-// Soft White: #FAFAFD
-// Text Dark Blue: #1E245C
+import { FadeIn, StaggerContainer, StaggerItem } from "@/components/ui/animations";
 
 const About = () => {
-  const fadeIn = {
-    initial: { opacity: 0, y: 20 },
-    animate: { opacity: 1, y: 0 },
-    transition: { duration: 0.6 },
-  };
-
-  const staggerContainer = {
-    animate: { transition: { staggerChildren: 0.1 } },
-  };
-
   return (
     <Layout>
-      <div className="min-h-screen bg-[#FAFAFD] text-[#1E245C] font-sans selection:bg-[#F4A7B9] selection:text-white">
+      <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary selection:text-white">
 
         {/* --- HERO SECTION --- */}
-        <section className="relative pt-32 pb-20 overflow-hidden bg-[#2436A8]">
-          <div className="absolute top-0 right-0 w-1/3 h-full bg-[#C6B7E2] opacity-10 rounded-l-full blur-3xl translate-x-1/2" />
-          <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-[#F4A7B9] opacity-10 rounded-full blur-3xl" />
+        <section className="relative pt-32 pb-24 overflow-hidden bg-primary">
+          <div className="absolute top-0 right-0 w-1/3 h-full bg-secondary opacity-20 rounded-l-full blur-3xl translate-x-1/2" />
+          <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-accent opacity-20 rounded-full blur-3xl" />
 
           <div className="container mx-auto px-6 relative z-10">
-            <motion.div
-              initial="initial"
-              animate="animate"
-              variants={staggerContainer}
-              className="text-center max-w-4xl mx-auto"
-            >
-              <motion.div
-                variants={fadeIn}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#F4A7B9]/20 border border-[#F4A7B9]/30 text-[#F4A7B9] mb-6 shadow-sm"
-              >
-                <Shield className="w-4 h-4" />
-                <span className="text-sm font-bold uppercase tracking-widest">
-                  Est. 1934
-                </span>
-              </motion.div>
+            <StaggerContainer className="text-center max-w-4xl mx-auto">
 
-              <motion.h1
-                variants={fadeIn}
-                className="text-5xl md:text-7xl font-serif font-bold text-white mb-8 leading-tight"
-              >
-                Pioneering{" "}
-                <span className="text-[#F4A7B9]">Women's Wellness</span> for Nearly
-                a Century
-              </motion.h1>
+              <StaggerItem>
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/20 border border-white/30 text-white mb-6 shadow-sm">
+                  <Shield className="w-4 h-4" />
+                  <span className="text-sm font-bold uppercase tracking-widest">
+                    National Professional Society
+                  </span>
+                </div>
+              </StaggerItem>
 
-              <motion.p
-                variants={fadeIn}
-                className="text-xl text-[#FAFAFD]/80 leading-relaxed mb-10"
-              >
-                The Obstetric and Gynaecological Society of Southern India (OGSSI)
-                stands as a beacon of clinical excellence and compassionate care.
-              </motion.p>
+              <StaggerItem>
+                <h1 className="text-5xl md:text-7xl font-serif font-bold text-white mb-8 leading-tight">
+                  Advancing{" "}
+                  <span className="text-secondary">
+                    Cosmetic & Functional Gynecology
+                  </span>{" "}
+                  in India
+                </h1>
+              </StaggerItem>
 
-              <motion.div variants={fadeIn}>
-                <button className="bg-[#F4A7B9] hover:bg-[#ef92a8] text-white px-8 py-4 rounded-full font-bold transition-all transform hover:scale-105 shadow-lg flex items-center gap-2 mx-auto group">
+              <StaggerItem>
+                <p className="text-xl text-white/80 leading-relaxed mb-10">
+                  The Cosmetic Gynecology Society of India (CGSI) is a national
+                  professional body dedicated to advancing aesthetic,
+                  reconstructive, and functional gynecology through ethical
+                  practice, scientific research, and advanced clinical training.
+                </p>
+              </StaggerItem>
+
+              <StaggerItem>
+                <button className="bg-white text-primary px-8 py-4 rounded-full font-bold transition-all transform hover:scale-105 shadow-lg flex items-center gap-2 mx-auto group hover:bg-secondary hover:text-foreground">
                   Join Our Community
                   <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </button>
-              </motion.div>
-            </motion.div>
+              </StaggerItem>
+
+            </StaggerContainer>
           </div>
         </section>
 
-        {/* --- STATS STRIP --- */}
-        <section className="relative -mt-10 z-20">
-          <div className="container mx-auto px-6">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-              {[
-                { label: "Members", value: "5,000+" },
-                { label: "Years of Legacy", value: "90+" },
-                { label: "Annual Events", value: "50+" },
-                { label: "Lives Impacted", value: "1M+" },
-              ].map((stat, i) => (
-                <div
-                  key={i}
-                  className="bg-white p-6 rounded-2xl shadow-xl border border-[#C6B7E2]/30 text-center"
-                >
-                  <div className="text-2xl font-bold text-[#2436A8]">
-                    {stat.value}
-                  </div>
-                  <div className="text-sm text-[#1E245C]/60 uppercase tracking-tighter">
-                    {stat.label}
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
 
-        {/* --- HISTORY SECTION --- */}
+        {/* --- HISTORY & FOUNDATION SECTION --- */}
         <section className="py-24">
           <div className="container mx-auto px-6">
             <div className="flex flex-col lg:flex-row items-center gap-16">
-              <motion.div
-                whileInView={{ opacity: 1, x: 0 }}
-                initial={{ opacity: 0, x: -50 }}
-                className="lg:w-1/2 relative"
-              >
-                <div className="absolute -top-4 -left-4 w-full h-full border-2 border-[#C6B7E2] rounded-3xl translate-x-4 translate-y-4 -z-10" />
-                <img
-                  src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=800&q=80"
-                  alt="Medical History"
-                  className="rounded-3xl shadow-2xl grayscale hover:grayscale-0 transition-all duration-700"
-                />
-              </motion.div>
 
-              <motion.div
-                whileInView={{ opacity: 1, x: 0 }}
-                initial={{ opacity: 0, x: 50 }}
-                className="lg:w-1/2 space-y-8"
-              >
-                <h2 className="text-4xl font-serif font-bold text-[#2436A8]">
-                  The First of Its Kind: <br />
-                  <span className="text-[#F4A7B9]">Our 1934 Legacy</span>
+              <FadeIn className="lg:w-1/2 relative">
+                <div className="absolute -top-4 -left-4 w-full h-full border-2 border-primary/20 rounded-3xl translate-x-4 translate-y-4 -z-10" />
+                {/* Image updated to stay full color at all times */}
+                <img
+                  src="https://res.cloudinary.com/ddibq0tya/image/upload/v1771321782/ChatGPT_Image_Feb_17_2026_03_19_21_PM_u5vgam.png"
+                  alt="Cosmetic Gynecology Training"
+                  className="rounded-3xl shadow-2xl transition-transform duration-700 hover:scale-[1.02]"
+                />
+              </FadeIn>
+
+              <FadeIn delay={0.2} className="lg:w-1/2 space-y-8">
+
+                <h2 className="text-4xl font-serif font-bold text-primary">
+                  A New Era in Women's Intimate Health
+                  <br />
+                  <span className="text-accent">
+                    Building India's Future in Cosmetic Gynecology
+                  </span>
                 </h2>
 
-                <p className="text-lg leading-relaxed text-[#1E245C]/80">
-                  OGSSI was the first official Obstetric and Gynaecological
-                  professional body in India. What started as a small gathering
-                  of visionaries has evolved into a powerhouse of research,
-                  advocacy, and training.
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  The Cosmetic Gynecology Society of India (CGSI) was established
+                  to bring together clinicians, educators, and researchers
+                  committed to advancing cosmetic and functional gynecology in
+                  India. Officially introduced around **CGCON 2025** — the 2nd
+                  Cosmetic Gynecology World Congress — the society represents a
+                  major step toward structured education and standardized
+                  procedures.
                 </p>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <p className="text-lg leading-relaxed text-muted-foreground">
+                  Under the leadership of pioneers like **Dr. Deepa Ganesh**, CGSI
+                  emphasizes evidence-based practice and ethical conduct. Our goal is
+                  to ensure safe access to intimate healthcare for women nationwide
+                  by empowering clinicians with world-class training.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+
                   <div className="flex gap-4 items-start">
-                    <div className="mt-1 bg-[#C6B7E2]/30 p-2 rounded-lg text-[#2436A8]">
+                    <div className="mt-1 bg-primary/10 p-2 rounded-lg text-primary">
                       <Activity size={20} />
                     </div>
                     <p className="text-sm font-medium">
-                      Standards of maternal care optimization
+                      Standardized clinical protocols for patient safety
                     </p>
                   </div>
 
                   <div className="flex gap-4 items-start">
-                    <div className="mt-1 bg-[#C6B7E2]/30 p-2 rounded-lg text-[#2436A8]">
+                    <div className="mt-1 bg-primary/10 p-2 rounded-lg text-primary">
                       <Globe size={20} />
                     </div>
                     <p className="text-sm font-medium">
-                      Global collaboration with FIGO & FOGSI
+                      Global academic collaborations (FIGO & FOGSI alignment)
                     </p>
                   </div>
+
                 </div>
-              </motion.div>
+              </FadeIn>
+
             </div>
           </div>
         </section>
-        {/* --- VISION & MISSION (LAVENDER CARDS) --- */}
-      <section className="py-24 bg-[#C6B7E2]/10">
-        <div className="container mx-auto px-6">
-          <div className="grid md:grid-cols-2 gap-12">
-            <motion.div 
-              whileHover={{ y: -10 }}
-              className="p-10 rounded-[2rem] bg-[#C6B7E2]/20 border border-[#C6B7E2] group transition-colors hover:bg-white"
-            >
-              <div className="w-16 h-16 rounded-2xl bg-[#2436A8] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                <Eye className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-3xl font-serif font-bold mb-4 text-[#2436A8]">Our Vision</h3>
-              <p className="text-lg text-[#1E245C]/70 leading-relaxed">
-                To be a leading organization in women’s healthcare and medical education, 
-                setting the gold standard for practices in Southern India and beyond, 
-                ensuring every woman has access to dignified and elite medical care.
-              </p>
-            </motion.div>
 
-            <motion.div 
-              whileHover={{ y: -10 }}
-              className="p-10 rounded-[2rem] bg-[#2436A8] text-white group"
-            >
-              <div className="w-16 h-16 rounded-2xl bg-[#F4A7B9] flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
-                <Target className="w-8 h-8 text-white" />
-              </div>
-              <h3 className="text-3xl font-serif font-bold mb-4">Our Mission</h3>
-              <p className="text-lg text-[#FAFAFD]/80 leading-relaxed">
-                To enhance maternal care, advocate for women’s health, and promote 
-                safe birth practices through continuous education, rigorous research, 
-                and extensive community outreach programs across the region.
-              </p>
-            </motion.div>
+
+        {/* --- VISION & MISSION SECTION --- */}
+        <section className="py-24 bg-secondary/30">
+          <div className="container mx-auto px-6">
+            <div className="grid md:grid-cols-2 gap-12">
+
+              <FadeIn>
+                <motion.div
+                  whileHover={{ y: -10 }}
+                  className="h-full p-10 rounded-[2rem] bg-card border border-border group transition-colors hover:shadow-xl"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                    <Eye className="w-8 h-8 text-primary" />
+                  </div>
+
+                  <h3 className="text-3xl font-serif font-bold mb-4 text-primary">
+                    Our Vision
+                  </h3>
+
+                  <p className="text-lg text-muted-foreground leading-relaxed">
+                    To be the leading professional organization in women’s
+                    healthcare and medical education, setting the gold standard
+                    for cosmetic and functional gynecology practices in India.
+                    We envision a future where every woman has access to dignified,
+                    elite, and evidence-based intimate medical care.
+                  </p>
+                </motion.div>
+              </FadeIn>
+
+
+              <FadeIn delay={0.2}>
+                <motion.div
+                  whileHover={{ y: -10 }}
+                  className="h-full p-10 rounded-[2rem] bg-primary text-primary-foreground group"
+                >
+                  <div className="w-16 h-16 rounded-2xl bg-white/20 flex items-center justify-center mb-8 group-hover:scale-110 transition-transform">
+                    <Target className="w-8 h-8 text-white" />
+                  </div>
+
+                  <h3 className="text-3xl font-serif font-bold mb-4">
+                    Our Mission
+                  </h3>
+
+                  <p className="text-lg text-primary-foreground/90 leading-relaxed">
+                    To enhance maternal and intimate care through continuous education,
+                    rigorous research, and extensive community outreach. We strive to
+                    advocate for women’s health and promote safe, ethical birth and
+                    aesthetic practices across the region.
+                  </p>
+                </motion.div>
+              </FadeIn>
+
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+
 
         {/* --- CTA SECTION --- */}
-        <section className="py-20 bg-[#F4A7B9]/10 border-t border-[#F4A7B9]/20">
+        <section className="py-20 bg-primary/5 border-t border-primary/10">
           <div className="container mx-auto px-6 text-center">
-            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-8">
-              Ready to be part of the legacy?
+
+            <h2 className="text-3xl md:text-4xl font-serif font-bold mb-8 text-primary">
+              Ready to be part of the CGSI legacy?
             </h2>
 
             <div className="flex flex-wrap justify-center gap-4">
-              <button className="bg-[#2436A8] text-white px-10 py-4 rounded-full font-bold hover:shadow-xl transition-all">
+
+              <button className="bg-primary text-primary-foreground px-10 py-4 rounded-full font-bold hover:shadow-xl transition-all hover:bg-primary/90">
                 Register as Member
               </button>
-              <button className="bg-white border-2 border-[#2436A8] text-[#2436A8] px-10 py-4 rounded-full font-bold hover:bg-[#2436A8] hover:text-white transition-all">
-                View Events
+
+              <button className="bg-transparent border-2 border-primary text-primary px-10 py-4 rounded-full font-bold hover:bg-primary hover:text-white transition-all">
+                View Conferences
               </button>
+
             </div>
+
           </div>
         </section>
 
