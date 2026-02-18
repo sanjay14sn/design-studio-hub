@@ -77,7 +77,7 @@ const HeroSection = () => {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-lg md:text-xl max-w-2xl mx-auto leading-relaxed text-slate-600"
             >
-              Merging 90 years of clinical excellence with <span className="text-slate-900 font-bold">Cutting-Edge AI</span> innovations to shape the next century of women's health.
+              Shaping the future of cosmetic and functional gynecology in India through <span className="text-slate-900 font-bold">standards, training, and safe care</span> for women.
             </motion.p>
 
             {/* CTA Buttons */}
