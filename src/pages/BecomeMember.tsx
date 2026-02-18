@@ -124,12 +124,7 @@ const BecomeMember = () => {
                                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                             </button>
 
-                            <p className="mt-6 text-sm text-center text-muted-foreground">
-                                Already a member?{" "}
-                                <a href="/login" className="text-primary font-bold">
-                                    Login here
-                                </a>
-                            </p>
+
 
                         </motion.div>
 

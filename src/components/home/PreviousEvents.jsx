@@ -99,12 +99,7 @@ export default function PreviousEvents() {
         </div>
 
         {/* FOOTER */}
-        <div className="mt-20 pt-8 border-t border-slate-100 flex justify-center">
-          <button className="flex items-center gap-2 text-slate-400 hover:text-blue-600 font-semibold transition-colors">
-            <span>View full archive catalog</span>
-            <span className="text-xl">→</span>
-          </button>
-        </div>
+
       </div>
     </section>
   );

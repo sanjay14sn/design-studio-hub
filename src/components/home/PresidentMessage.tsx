@@ -50,7 +50,7 @@ const PresidentMessage = () => {
                   Dr. Deepa Ganesh
                 </div>
                 <div className="text-sm font-bold uppercase tracking-wide opacity-70 text-muted-foreground">
-                  President, OGSSI 2025-2026
+                  President, CGSI 2025-2026
                 </div>
               </div>
             </div>

@@ -4,7 +4,7 @@ import { Newspaper, Shield, Share2 } from "lucide-react";
 import { motion } from "framer-motion";
 
 const articles = [
-    { id: 1, title: "OGSSI's Move to Modernize Maternal Healthcare", date: "Jan 12, 2025", paper: "The Medical Times" },
+    { id: 1, title: "CGSI's Move to Modernize Maternal Healthcare", date: "Jan 12, 2025", paper: "The Medical Times" },
     { id: 2, title: "Pioneering Robotic Surgery in Chennai", date: "Dec 05, 2024", paper: "City Health Bulletin" },
     { id: 3, title: "Society's Impact on Rural Women's Health", date: "Oct 22, 2024", paper: "Healthcare Weekly" },
 ];

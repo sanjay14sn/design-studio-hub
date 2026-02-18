@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
-import { ModeToggle } from "@/components/mode-toggle";
+// import { ModeToggle } from "@/components/mode-toggle";
 
 import {
   DropdownMenu,
@@ -39,6 +39,7 @@ const navItems: NavItem[] = [
           { name: "2024", path: "/conference-2024" },
         ],
       },
+      { name: "Activities", path: "/events" },
     ],
   },
   { name: "Newsletter", path: "/newsletter" },
@@ -191,13 +192,13 @@ const Header: React.FC = () => {
 
           {/* RIGHT SIDE */}
           <div className="hidden lg:flex items-center gap-4">
-            <ModeToggle />
+            {/* <ModeToggle /> */}
 
             <Link
               to="/become-member"
               className="px-6 py-2 rounded-full font-bold text-sm bg-primary text-white flex items-center gap-2"
             >
-              Join Us <ArrowRight size={16} />
+              Become a Member <ArrowRight size={16} />
             </Link>
           </div>
 

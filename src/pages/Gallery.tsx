@@ -2,183 +2,116 @@
 
 import React, { useRef } from "react";
 import Layout from "@/components/layout/Layout";
-import { Shield, ArrowUpRight, Camera, Sparkles } from "lucide-react";
-import { motion, useScroll, useTransform, Variants } from "framer-motion";
+import { motion, useScroll, useTransform, useInView } from "framer-motion";
 
 /* -------------------------------------------------------------------------- */
 /* GALLERY DATA                                                               */
 /* -------------------------------------------------------------------------- */
-const galleryItems = [
-  {
-    id: 1,
-    title: "Annual Conference",
-    tag: "Academic",
-    image: "https://images.unsplash.com/photo-1521737604893-d14cc237f11d?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 2,
-    title: "Clinical Workshop",
-    tag: "Practical",
-    image: "https://images.unsplash.com/photo-1580281657521-6c1b1a6b7d91?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 3,
-    title: "Awareness Camp",
-    tag: "Community",
-    image: "https://images.unsplash.com/photo-1504439468489-c8920d796a29?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 4,
-    title: "Leadership Meet",
-    tag: "Executive",
-    image: "https://images.unsplash.com/photo-1515168833906-d2a3b82b302a?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 5,
-    title: "Training Session",
-    tag: "Education",
-    image: "https://images.unsplash.com/photo-1524178232363-1fb2b075b655?auto=format&fit=crop&w=800&q=80",
-  },
-  {
-    id: 6,
-    title: "CME Program",
-    tag: "Medical",
-    image: "https://images.unsplash.com/photo-1556761175-129418cb2dfe?auto=format&fit=crop&w=800&q=80",
-  },
+const galleryImages = [
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408324/83a943f7-cca7-48cd-8906-50ef77cc73b2_3_e8isky.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408323/79ec1af2-98c1-4f41-97c1-1a9a0f5f54db_3_l2gld2.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408322/73b294a4-3026-47f9-ba0f-0c0489a72de6_3_cairep.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408327/DOT01099_vy0py7.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408340/DOT09612_gb0s41.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408343/DSC00013_qhgfu6.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408343/DOT08396_wlbrvi.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408343/DOT01146_jumznb.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408346/DSC00156_clynjk.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408345/DSC00204_hssqvw.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408347/DSC00211_n37f7h.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408348/DSC08137_pehprk.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408354/DSC08580_isqbnj.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408356/DSC08546_mgcbiu.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408360/DSC00256_ri7bbi.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408362/DSC08658_qmqnav.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408369/DSC09006_bepop5.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408368/DSC08883_opfqhu.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408370/DSC08861_duszf9.jpg",
+  "https://res.cloudinary.com/ddibq0tya/image/upload/v1771408371/DSC08569_koxmvs.jpg",
 ];
 
-/* -------------------------------------------------------------------------- */
-/* ANIMATIONS                                                                 */
-/* -------------------------------------------------------------------------- */
-const fadeInUp: Variants = {
-  hidden: { opacity: 0, y: 40 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.8, ease: [0.22, 1, 0.36, 1] },
-  },
+const GalleryItem = ({ src, index }: { src: string; index: number }) => {
+  const ref = useRef(null);
+  const isInView = useInView(ref, { once: true, margin: "-10% 0px" });
+
+  // Alternating heights and widths for that "International" editorial look
+  const isLarge = index % 7 === 0;
+  const isTall = index % 4 === 0;
+
+  return (
+    <motion.div
+      ref={ref}
+      initial={{ opacity: 0, y: 50 }}
+      animate={isInView ? { opacity: 1, y: 0 } : {}}
+      transition={{ duration: 0.8, delay: (index % 3) * 0.1, ease: [0.215, 0.61, 0.355, 1] }}
+      className={`relative overflow-hidden group bg-secondary/10 
+        ${isLarge ? "md:col-span-2 md:row-span-2" : ""} 
+        ${isTall ? "md:row-span-2" : ""} 
+        rounded-sm`}
+    >
+      <motion.img
+        whileHover={{ scale: 1.05 }}
+        transition={{ duration: 0.6 }}
+        src={src}
+        alt={`Gallery Exhibit ${index + 1}`}
+        className="w-full h-full object-cover grayscale-[0.5] hover:grayscale-0 transition-all duration-700"
+      />
+      {/* Sophisticated Overlay */}
+      <div className="absolute inset-0 bg-black/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500 flex items-end p-6">
+        <span className="text-white text-xs tracking-[0.2em] uppercase font-light">Exhibit No. {index + 1}</span>
+      </div>
+    </motion.div>
+  );
 };
 
-const staggerContainer: Variants = {
-  hidden: { opacity: 0 },
-  visible: { opacity: 1, transition: { staggerChildren: 0.15 } },
-};
-
-/* -------------------------------------------------------------------------- */
-/* PAGE                                                                       */
-/* -------------------------------------------------------------------------- */
 const GalleryPage = () => {
   const containerRef = useRef<HTMLDivElement>(null);
+  const { scrollYProgress } = useScroll();
 
-  const { scrollYProgress } = useScroll({
-    target: containerRef,
-    offset: ["start start", "end end"],
-  });
-
-  const xLeft = useTransform(scrollYProgress, [0, 1], [0, -600]);
+  // Subtle Parallax for the Background Text
+  const xLeft = useTransform(scrollYProgress, [0, 1], ["0%", "-30%"]);
 
   return (
     <Layout>
-      <div ref={containerRef}>
-        {/* ================= HERO ================= */}
-        <section className="relative min-h-[85vh] flex items-center bg-background overflow-hidden pt-20">
-          <div className="absolute top-[-10%] right-[-5%] w-[600px] h-[600px] bg-secondary/20 rounded-full blur-[120px]" />
-          <div className="absolute bottom-[-10%] left-[-5%] w-[500px] h-[500px] bg-accent/15 rounded-full blur-[120px]" />
-
-          <div className="container mx-auto px-6 grid md:grid-cols-2 gap-12 items-center relative z-10">
-            <motion.div initial="hidden" animate="visible" variants={staggerContainer}>
-              <motion.div variants={fadeInUp} className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 text-primary mb-8">
-                <Sparkles className="w-4 h-4 text-accent" />
-                <span className="text-xs font-bold uppercase tracking-widest">Our Visual Legacy</span>
-              </motion.div>
-
-              <motion.h1 variants={fadeInUp} className="text-5xl md:text-7xl font-serif font-bold text-foreground leading-[1.1] mb-8">
-                Keep Up About Your <br />
-                <span className="text-primary italic">Health & Fitness</span>
-              </motion.h1>
-
-              <motion.p variants={fadeInUp} className="text-lg text-muted-foreground max-w-md">
-                Capturing moments of innovation, community care, and clinical excellence.
-              </motion.p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 1 }}
-              className="relative"
-            >
-              <div className="rounded-[3rem] overflow-hidden shadow-2xl border-[12px] border-white">
-                <img
-                  src="https://images.unsplash.com/photo-1537368910025-700350fe46c7?auto=format&fit=crop&q=80"
-                  alt="Doctor"
-                  className="w-full h-auto object-cover"
-                />
-              </div>
-
-              <motion.div
-                animate={{ y: [0, -20, 0] }}
-                transition={{ duration: 4, repeat: Infinity }}
-                className="absolute -bottom-6 -left-6 bg-white p-6 rounded-2xl shadow-xl border border-secondary"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white">
-                    <Shield className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <p className="text-[10px] uppercase font-black text-accent">Certified Care</p>
-                    <p className="text-foreground font-bold">Excellence Since 1934</p>
-                  </div>
-                </div>
-              </motion.div>
-            </motion.div>
+      <div className="bg-[#f8f8f8] min-h-screen pb-32">
+        {/* ================= MINIMALIST HEADER ================= */}
+        <header className="pt-32 pb-16 px-6 container mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-baseline gap-4 border-b border-black/10 pb-8">
+            <h1 className="text-6xl md:text-8xl font-serif tracking-tighter">
+              Archive<span className="text-primary">.</span>
+            </h1>
+            <p className="max-w-xs text-sm uppercase tracking-widest text-muted-foreground leading-relaxed">
+              A visual documentation of clinical excellence and aesthetic mastery by the Cosmetic Gynecology Society of India.
+            </p>
           </div>
-        </section>
+        </header>
 
-        {/* ================= SCROLL TEXT ================= */}
-        <div className="py-7 bg-primary overflow-hidden">
-          <motion.div style={{ x: xLeft }} className="whitespace-nowrap flex gap-20">
-            {[1, 2, 3, 4].map((i) => (
-              <span key={i} className="text-6xl md:text-8xl font-serif font-black text-white/10 uppercase italic">
-                COSMETIC • GYNECOLOGY • SOCIETY OF • INDIA •
+        {/* ================= TICKER (International Style) ================= */}
+        <div className="py-4 border-b border-black/10 bg-white overflow-hidden">
+          <motion.div style={{ x: xLeft }} className="whitespace-nowrap flex gap-12 items-center">
+            {[1, 2, 3].map((i) => (
+              <span key={i} className="text-sm tracking-[0.5em] font-light uppercase">
+                Global Standards • Clinical Precision • Aesthetic Innovation •
               </span>
             ))}
           </motion.div>
         </div>
 
-        {/* ================= GALLERY ================= */}
-        <section className="py-32 bg-background">
-          <div className="container mx-auto px-6">
-            <motion.div
-              variants={staggerContainer}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true }}
-              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10"
-            >
-              {galleryItems.map((item) => (
-                <motion.div key={item.id} variants={fadeInUp} whileHover={{ y: -15 }} className="group">
-                  <div className="aspect-[4/5] overflow-hidden rounded-[2.5rem] bg-white shadow-lg">
-                    <img
-                      src={item.image}
-                      alt={item.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                    />
-
-                    <div className="absolute inset-0 bg-gradient-to-t from-primary via-primary/40 to-transparent opacity-0 group-hover:opacity-100 transition-all flex items-end p-10">
-                      <div className="text-white">
-                        <h3 className="text-2xl font-serif font-bold mb-4">{item.title}</h3>
-                        <button className="flex items-center gap-2 text-accent font-bold text-xs uppercase tracking-widest">
-                          Expand Gallery <ArrowUpRight className="w-4 h-4" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </motion.div>
+        {/* ================= MASONRY-STYLE GRID ================= */}
+        <section className="mt-16 px-6 container mx-auto">
+          <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 auto-rows-[250px] gap-4">
+            {galleryImages.map((src, index) => (
+              <GalleryItem key={index} src={src} index={index} />
+            ))}
           </div>
         </section>
+
+        {/* ================= FOOTER CTA ================= */}
+        <footer className="mt-32 text-center">
+          <button className="px-12 py-4 border border-black text-xs uppercase tracking-widest hover:bg-black hover:text-white transition-colors duration-500">
+            View Full Archive
+          </button>
+        </footer>
       </div>
     </Layout>
   );

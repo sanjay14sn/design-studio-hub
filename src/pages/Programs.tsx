@@ -23,7 +23,7 @@ const workshops = [
   "6P's Workshop",
   "Adolescent Health Workshop",
   "Hysteroscopy Workshop",
-  "FOGSI-FIGO-OGSSI Cervical Cancer Workshop",
+  "FOGSI-FIGO-CGSI Cervical Cancer Workshop",
   "Embryo Transfer Workshop",
   "Labor Ward Protocol Workshop",
 ];

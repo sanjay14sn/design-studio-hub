@@ -1,148 +1,191 @@
 import React from "react";
 import Layout from "@/components/layout/Layout";
-import { Sparkles, Image as ImageIcon, Video, Calendar, MapPin, Users, Award, BookOpen, Clock, Heart, Shield, Terminal, Zap, Info, PlayCircle } from "lucide-react";
+import {
+    Calendar,
+    MapPin,
+    Users,
+    Heart,
+    Info,
+    PlayCircle,
+    Zap
+} from "lucide-react";
 import { motion } from "framer-motion";
 
 const Conference2024 = () => {
-    const images = Array.from({ length: 30 }, (_, i) => ({
-        id: i + 1,
-        url: `https://images.unsplash.com/photo-${1521737604893 + i}?auto=format&fit=crop&w=400&q=80`,
-        title: `Memory ${i + 1}`
-    }));
+    // Organized images from your provided links
+    const eventImages = [
+        "https://res.cloudinary.com/ddibq0tya/image/upload/v1771407207/IMG_1490_qbsycl.jpg",
+        "https://res.cloudinary.com/ddibq0tya/image/upload/v1771407195/IMG_2914_agmgkd.jpg",
+        "https://res.cloudinary.com/ddibq0tya/image/upload/v1771407196/IMG_2912_igfpzl.jpg",
+        "https://res.cloudinary.com/ddibq0tya/image/upload/v1771407194/IMG_2909_wvc2px.jpg",
+        "https://res.cloudinary.com/ddibq0tya/image/upload/v1771407192/IMG_2913_aggpe9.jpg",
+        "https://res.cloudinary.com/ddibq0tya/image/upload/v1771407190/IMG_2908_qljo9j.jpg",
+        "https://res.cloudinary.com/ddibq0tya/image/upload/v1771407189/IMG_2906_tdwzap.jpg",
+        "https://res.cloudinary.com/ddibq0tya/image/upload/v1771407188/IMG_2904_wpzv7j.jpg",
+        "https://res.cloudinary.com/ddibq0tya/image/upload/v1771407185/IMG_2902_v8pfzs.jpg",
+        "https://res.cloudinary.com/ddibq0tya/image/upload/v1771407186/IMG_2905_rafj0b.jpg",
+        "https://res.cloudinary.com/ddibq0tya/image/upload/v1771407185/IMG_2903_hdgfos.jpg",
+        "https://res.cloudinary.com/ddibq0tya/image/upload/v1771407182/IMG_2891_m64yaa.jpg",
+        "https://res.cloudinary.com/ddibq0tya/image/upload/v1771407180/IMG_2901_bsaxio.jpg",
+        "https://res.cloudinary.com/ddibq0tya/image/upload/v1771407179/IMG_2892_ga1ufo.jpg",
+        "https://res.cloudinary.com/ddibq0tya/image/upload/v1771407177/IMG_2891_2_bdggux.jpg"
+    ];
+
+    const eventVideo = "https://res.cloudinary.com/ddibq0tya/video/upload/v1771399981/WhatsApp_Video_2026-02-13_at_9.23.31_AM_mplpkn.mp4";
 
     return (
         <Layout>
-            {/* 1. Hero Section */}
+            {/* HERO SECTION */}
             <section className="relative pt-32 pb-20 bg-background overflow-hidden text-center">
                 <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_center,rgba(var(--primary-rgb),0.1)_0%,transparent_70%)]" />
                 <div className="container mx-auto px-6 relative z-10">
-                    <motion.div initial={{ opacity: 0, scale: 0.9 }} animate={{ opacity: 1, scale: 1 }}>
+                    <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}>
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-secondary text-secondary-foreground mb-8">
                             <Calendar className="w-4 h-4" />
-                            <span className="text-xs font-bold uppercase tracking-widest">Past Event Archive</span>
+                            <span className="text-xs font-bold uppercase tracking-widest">Historic First Edition</span>
                         </div>
-                        <h1 className="text-6xl md:text-8xl font-serif font-bold text-foreground mb-8">
-                            CGCON <span className="text-accent italic">2024:</span> <br />
-                            Clinical Excellence
+                        <h1 className="text-5xl md:text-7xl font-serif font-bold text-foreground mb-6">
+                            CGCON <span className="text-accent italic">2024</span>
                         </h1>
-                        <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-12 italic">
-                            "Honoring our heritage, advancing our skills."
+                        <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8 italic">
+                            “South India’s First Dedicated Cosmetic Gynecology Congress”
                         </p>
-                        <div className="flex justify-center gap-12 font-bold text-primary">
-                            <div className="flex items-center gap-2"><MapPin /> Pondicherry</div>
-                            <div className="flex items-center gap-2"><Users /> 1,800 Attendees</div>
+                        <div className="flex justify-center gap-8 font-bold text-primary">
+                            <div className="flex items-center gap-2"><MapPin className="w-5 h-5" /> Tamil Nadu</div>
+                            <div className="flex items-center gap-2"><Users className="w-5 h-5" /> 150+ Delegates</div>
                         </div>
                     </motion.div>
                 </div>
             </section>
 
-            {/* 2. Detailed Content (~100 lines of descriptive text) */}
-            <section className="py-20">
-                <div className="container mx-auto px-6">
-                    <div className="grid lg:grid-cols-3 gap-16">
-                        <div className="lg:col-span-2 space-y-8 text-lg text-muted-foreground leading-relaxed text-justify">
-                            <h2 className="text-4xl font-serif font-bold text-foreground text-left">The Pondicherry Summit</h2>
-                            <p>
-                                CGCON 2024 was more than just a medical meeting; it was a gathering of souls dedicated to the betterment of women's health. Held in the picturesque city of Pondicherry, the conference blended the serene coastal atmosphere with intense academic rigor. It was a year where we focused heavily on maternal morbidity and the systemic changes required to reduce it.
-                            </p>
-                            <p>
-                                The opening ceremony was graced by luminaries in the field who spoke about the 'French Connection' to medical history in the region, bridging the gap between historical practices and modern requirements. The keynote address on placental health set a high bar for the technical sessions that followed.
-                            </p>
-                            <p>
-                                A major highlight of 2024 was the introduction of the 'Live Surgery Transmissions,' where delegates could observe real-time procedures from Pondicherry's leading medical centers. The level of interaction allowed during these sessions was unprecedented, with surgeons answering questions while performing complex laparoscopic surgeries.
-                            </p>
-                            <p>
-                                The workshop on 'Social Media for Medical Professionals' was a surprising hit, acknowledging that in 2024, patient outreach happens just as much on digital platforms as it does in clinics. We discussed ethics, privacy, and the power of verified medical information in an era of misinformation.
-                            </p>
-                            <p>
-                                In our continued effort to be inclusive, the 2024 conference hosted a dedicated 'Rural Healthcare Symposium.' Doctors working in the most remote corners of southern India shared their success stories and their immense challenges. Their resilience was an inspiration to every city-based practitioner in the room.
-                            </p>
-                            <p>
-                                The 'Innovation Lab' was a buzzing hive of activity, showcasing locally-developed medical devices tailored for the Indian context. From low-cost Doppler units to advanced surgical clamps, the spirit of 'Make in India' was alive and well. It was heartening to see our members not just using technology but creating it.
-                            </p>
-                            <p>
-                                We also placed a significant emphasis on doctor-wellbeing this year. The early morning yoga sessions on the beach and the panel on 'Avoiding Burnout' were essential additions to our program. We recognized that to care for others effectively, we must first learn to care for ourselves.
-                            </p>
-                            <p>
-                                The scientific exhibits displayed over 300 posters, with a notable increase in the participation of postgraduate students. The quality of research into local health patterns and pharmacological responses was outstanding, earning praise from the international observers who joined us.
-                            </p>
-                            <p>
-                                As we retrospect on 2024, the feedback from our delegates has been overwhelmingly positive. The Pondicherry Summit will be remembered for its academic depth, its cultural warmth, and the tangible sense of progress it left in its wake. This archive captures that essence for eternity.
-                            </p>
-                            <p>
-                                We thank the local Pondicherry medical fraternity for their incredible hospitality. The success of CGCON 2024 was a collaborative achievement, proving once again that OGSSI is a family that grows stronger with every passing year. We carry these lessons forward with pride and determination.
+            {/* DYNAMIC CONTENT GRID */}
+            <section className="py-12">
+                <div className="container mx-auto px-6 space-y-24">
+
+                    {/* Block 1: Intro + 2 Images */}
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                        <div className="space-y-6">
+                            <h2 className="text-4xl font-serif font-bold">A Landmark Beginning</h2>
+                            <p className="text-lg text-muted-foreground leading-relaxed text-justify">
+                                CGCON 2024 marked South India’s first dedicated Cosmetic Gynecology Congress —
+                                a truly historic academic milestone that signaled the rapid emergence of this
+                                specialized field in modern women’s healthcare. Originally planned for 60 participants,
+                                the congress proudly welcomed more than 150 enthusiastic delegates.
                             </p>
                         </div>
+                        <div className="grid grid-cols-2 gap-4">
+                            <img src={eventImages[0]} alt="Event 1" className="rounded-2xl h-64 w-full object-cover shadow-lg" />
+                            <img src={eventImages[1]} alt="Event 2" className="rounded-2xl h-64 w-full object-cover shadow-lg mt-8" />
+                        </div>
+                    </div>
 
-                        <div className="space-y-8">
-                            <div className="p-8 rounded-3xl bg-secondary/20 border border-border">
-                                <Info className="text-accent mb-4 w-10 h-10" />
-                                <h4 className="text-xl font-bold text-foreground mb-4">Key Themes</h4>
-                                <ul className="space-y-4 text-sm font-medium">
-                                    <li className="flex items-start gap-2 border-b border-border pb-2">• Maternal Near-Miss Audits</li>
-                                    <li className="flex items-start gap-2 border-b border-border pb-2">• Endoscopy in Low-Resource Settings</li>
-                                    <li className="flex items-start gap-2 border-b border-border pb-2">• Legal & Ethical Frontiers in O&G</li>
-                                    <li className="flex items-start gap-2">• Adolescent Reproductive Health</li>
-                                </ul>
+                    {/* Block 2: 2 Images + Text (Reversed) */}
+                    <div className="grid lg:grid-cols-2 gap-12 items-center">
+                        <div className="grid grid-cols-2 gap-4 order-2 lg:order-1">
+                            <img src={eventImages[2]} alt="Event 3" className="rounded-2xl h-64 w-full object-cover shadow-lg" />
+                            <img src={eventImages[3]} alt="Event 4" className="rounded-2xl h-64 w-full object-cover shadow-lg mb-8" />
+                        </div>
+                        <div className="space-y-6 order-1 lg:order-2">
+                            <h2 className="text-4xl font-serif font-bold text-accent italic">Eminent Leadership</h2>
+                            <p className="text-lg text-muted-foreground leading-relaxed text-justify">
+                                The inauguration ceremony brought immense prestige with the presence of Prof. Dr. Narayanasamy,
+                                Vice Chancellor of Tamil Nadu Medical University, and Dr. Vijaya S, President of OGSSI.
+                                Their inspiring words highlighted the importance of structured education and ethical practice
+                                in this emerging subspecialty.
+                            </p>
+                        </div>
+                    </div>
+
+                    {/* Block 3: Video Highlight Section - Autoplay Fixed */}
+                    <div className="bg-secondary/10 rounded-[3rem] p-8 md:p-12">
+                        <div className="grid lg:grid-cols-5 gap-12 items-center">
+                            <div className="lg:col-span-2 space-y-6">
+                                <div className="flex items-center gap-2 text-primary font-bold">
+                                    <Zap className="animate-pulse" /> LIVE HIGHLIGHTS
+                                </div>
+                                <h2 className="text-3xl font-serif font-bold">Relive the Experience</h2>
+                                <p className="text-muted-foreground">
+                                    Watch the key moments from our scientific sessions and the vibrant interaction
+                                    between experts and delegates.
+                                </p>
                             </div>
-
-                            <div className="relative group">
-                                <div className="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-3xl blur opacity-25 group-hover:opacity-100 transition duration-1000"></div>
-                                <div className="relative p-8 rounded-3xl bg-card border border-border leading-none flex items-center divide-x divide-border">
-                                    <div className="pr-6">
-                                        <Heart className="text-primary w-8 h-8" />
-                                    </div>
-                                    <div className="pl-6">
-                                        <p className="text-secondary-foreground font-bold">FIGO Endorsed</p>
-                                        <p className="text-xs text-muted-foreground mt-1">International Standard</p>
-                                    </div>
+                            <div className="lg:col-span-3">
+                                <div className="aspect-video rounded-3xl overflow-hidden shadow-2xl border-4 border-white bg-black">
+                                    <video
+                                        autoPlay
+                                        muted
+                                        loop
+                                        playsInline
+                                        className="w-full h-full object-cover"
+                                    >
+                                        <source src={eventVideo} type="video/mp4" />
+                                        Your browser does not support the video tag.
+                                    </video>
                                 </div>
                             </div>
+                        </div>
+                    </div>
+
+                    {/* Block 4: Text + Info Box */}
+                    <div className="grid lg:grid-cols-3 gap-12">
+                        <div className="lg:col-span-2 space-y-6">
+                            <h2 className="text-4xl font-serif font-bold">Beyond the Lecture Halls</h2>
+                            <p className="text-lg text-muted-foreground leading-relaxed">
+                                CGCON 2024 fostered strong professional networking and mentorship opportunities.
+                                Participants connected with pioneers in cosmetic gynecology, explored training pathways,
+                                and discussed future research directions that will help shape the discipline
+                                across South India and beyond.
+                            </p>
+                            <div className="grid grid-cols-2 gap-4">
+                                <img src={eventImages[4]} alt="Event 5" className="rounded-2xl h-48 w-full object-cover" />
+                                <img src={eventImages[5]} alt="Event 6" className="rounded-2xl h-48 w-full object-cover" />
+                            </div>
+                        </div>
+                        <div className="space-y-6">
+                            <div className="p-8 rounded-3xl bg-accent text-accent-foreground">
+                                <Info className="mb-4 w-10 h-10" />
+                                <h4 className="text-xl font-bold mb-4">Congress Stats</h4>
+                                <ul className="space-y-3 text-sm opacity-90">
+                                    <li>• 150+ Registered Delegates</li>
+                                    <li>• 12+ Scientific Sessions</li>
+                                    <li>• 10+ Expert Speakers</li>
+                                    <li>• 1 Goal: Clinical Excellence</li>
+                                </ul>
+                            </div>
+                            <img src={eventImages[6]} alt="Side" className="rounded-3xl h-64 w-full object-cover shadow-md" />
                         </div>
                     </div>
                 </div>
             </section>
 
-            {/* 3. 30 Images Grid */}
+            {/* FULL MASONRY-STYLE GALLERY */}
             <section className="py-24 bg-card">
                 <div className="container mx-auto px-6">
-                    <h2 className="text-4xl font-serif font-bold text-foreground mb-12">Visual <span className="text-accent italic">Memories</span></h2>
-                    <div className="grid grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4">
-                        {images.map((img) => (
+                    <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-4">
+                        <h2 className="text-4xl font-serif font-bold">Event <span className="text-accent italic">Gallery</span></h2>
+                        <p className="text-muted-foreground max-w-xs text-right">Capturing the smiles and scientific milestones of CGCON 2024.</p>
+                    </div>
+
+                    <div className="columns-2 md:columns-3 lg:columns-4 gap-4 space-y-4">
+                        {eventImages.slice(7).map((url, index) => (
                             <motion.div
-                                key={img.id}
-                                whileHover={{ y: -5 }}
-                                className="aspect-square rounded-lg overflow-hidden grayscale hover:grayscale-0 transition-all duration-500 shadow-sm"
+                                key={index}
+                                whileHover={{ scale: 1.02 }}
+                                className="break-inside-avoid rounded-2xl overflow-hidden shadow-sm hover:shadow-xl transition-all duration-300"
                             >
-                                <img src={img.url} alt={img.title} className="w-full h-full object-cover" />
+                                <img src={url} alt={`Gallery ${index}`} className="w-full h-auto object-cover" />
                             </motion.div>
                         ))}
                     </div>
                 </div>
             </section>
 
-            {/* 4. 2 Video Embeds */}
-            <section className="py-24 bg-secondary/5">
+            {/* FOOTER CALLOUT */}
+            <section className="py-20 text-center">
                 <div className="container mx-auto px-6">
-                    <h2 className="text-4xl font-serif font-bold text-foreground mb-16 text-center italic">Watch the <span className="text-primary">Recaps</span></h2>
-                    <div className="max-w-5xl mx-auto grid md:grid-cols-2 gap-16">
-                        {[
-                            { title: "Opening Ceremony", id: "dQw4w9WgXcQ" },
-                            { title: "Scientific Highlights", id: "dQw4w9WgXcQ" }
-                        ].map((vid, i) => (
-                            <div key={i} className="group">
-                                <div className="aspect-video rounded-3xl overflow-hidden shadow-xl group-hover:shadow-primary/20 transition-all">
-                                    <iframe
-                                        className="w-full h-full"
-                                        src={`https://www.youtube.com/embed/${vid.id}`}
-                                        title={vid.title}
-                                        allowFullScreen
-                                    ></iframe>
-                                </div>
-                                <p className="mt-6 text-center font-bold text-xl group-hover:text-primary transition-colors">{vid.title}</p>
-                            </div>
-                        ))}
-                    </div>
+                    <Heart className="w-12 h-12 text-primary mx-auto mb-6" />
+                    <h2 className="text-3xl font-serif font-bold mb-4">Ready for the Next Chapter?</h2>
+                    <p className="text-muted-foreground mb-8">The legacy of CGCON 2024 continues to inspire our upcoming editions.</p>
                 </div>
             </section>
         </Layout>

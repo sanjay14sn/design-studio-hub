@@ -26,7 +26,7 @@ const Contact = () => {
       {/* Hero Section */}
       <section className="py-24 relative overflow-hidden">
         <div className="floating-shape w-96 h-96 -top-48 -right-48 blur-3xl" />
-        
+
         <div className="container mx-auto px-4">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="section-badge mx-auto">
@@ -52,7 +52,7 @@ const Contact = () => {
               <h2 className="text-3xl font-serif font-bold">
                 Contact <span className="gradient-text">Information</span>
               </h2>
-              
+
               <div className="space-y-6">
                 <div className="flex items-start gap-4 p-6 rounded-2xl bg-card border border-border card-hover">
                   <div className="w-12 h-12 rounded-full gradient-bg flex items-center justify-center flex-shrink-0">
@@ -70,8 +70,8 @@ const Contact = () => {
                   </div>
                   <div>
                     <h3 className="font-serif font-bold mb-1">Email</h3>
-                    <a href="mailto:ogssi@yahoo.com" className="text-primary hover:underline">
-                      ogssi@yahoo.com
+                    <a href="mailto:cgsi@yahoo.com" className="text-primary hover:underline">
+                      cgsi@yahoo.com
                     </a>
                   </div>
                 </div>
@@ -93,7 +93,7 @@ const Contact = () => {
             {/* Contact Form */}
             <div className="p-8 rounded-3xl bg-card border border-border">
               <h2 className="text-2xl font-serif font-bold mb-6">Send a Message</h2>
-              
+
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div>
                   <label className="block text-sm font-medium mb-2">Name</label>

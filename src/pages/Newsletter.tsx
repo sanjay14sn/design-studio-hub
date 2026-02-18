@@ -21,7 +21,7 @@ const Newsletter = () => {
                             Stay Updated
                         </div>
                         <h1 className="text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-foreground mb-6">
-                            OGSSI <span className="text-primary">Newsletter</span>
+                            CGSI <span className="text-primary">Newsletter</span>
                         </h1>
                         <p className="text-lg text-muted-foreground">
                             Download our latest newsletters and keep yourself informed about society activities and medical updates.

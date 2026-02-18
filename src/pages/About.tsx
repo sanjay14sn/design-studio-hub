@@ -55,12 +55,7 @@ const About = () => {
                 </p>
               </StaggerItem>
 
-              <StaggerItem>
-                <button className="bg-white text-primary px-8 py-4 rounded-full font-bold transition-all transform hover:scale-105 shadow-lg flex items-center gap-2 mx-auto group hover:bg-secondary hover:text-foreground">
-                  Join Our Community
-                  <ChevronRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </button>
-              </StaggerItem>
+
 
             </StaggerContainer>
           </div>
@@ -207,9 +202,7 @@ const About = () => {
                 Register as Member
               </button>
 
-              <button className="bg-transparent border-2 border-primary text-primary px-10 py-4 rounded-full font-bold hover:bg-primary hover:text-white transition-all">
-                View Conferences
-              </button>
+
 
             </div>
 

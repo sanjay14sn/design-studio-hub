@@ -56,10 +56,7 @@ const HeroSection = () => {
               transition={{ duration: 0.5 }}
               className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-slate-200 bg-white/50 shadow-sm backdrop-blur-md"
             >
-              <Sparkles className="w-4 h-4 text-primary animate-pulse" />
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-slate-600">
-                Next-Gen Healthcare
-              </span>
+
             </motion.div>
 
             {/* Futuristic Heading - Darker Text for Contrast */}
@@ -91,21 +88,15 @@ const HeroSection = () => {
               className="flex flex-col sm:flex-row gap-4 pt-6 justify-center items-center"
             >
               <Link
-                to="/membership"
+                to="/about"
                 className="group relative px-8 py-4 rounded-full flex items-center justify-center gap-3 overflow-hidden bg-slate-900 text-white font-bold transition-all hover:scale-105 hover:shadow-xl hover:shadow-primary/20"
               >
                 <div className="absolute inset-0 w-full h-full bg-gradient-to-r from-primary via-purple-500 to-primary opacity-0 group-hover:opacity-20 transition-opacity" />
-                <span className="relative z-10">Explore Intelligence</span>
+                <span className="relative z-10">Explore Us</span>
                 <Brain className="w-5 h-5 relative z-10 group-hover:rotate-12 transition-transform" />
               </Link>
 
-              <Link
-                to="/events"
-                className="px-8 py-4 rounded-full border border-slate-200 bg-white/80 backdrop-blur-sm font-bold transition-all hover:bg-slate-50 flex items-center justify-center gap-2 text-slate-700 hover:scale-105 shadow-sm"
-              >
-                View Analytics
-                <ArrowRight className="w-4 h-4" />
-              </Link>
+
             </motion.div>
 
             {/* Tech Partner Logos - Soft Grayscale */}
