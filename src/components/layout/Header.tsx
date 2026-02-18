@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { Menu, X, ArrowRight, ChevronDown } from "lucide-react";
-// import { ModeToggle } from "@/components/mode-toggle";
 
 import {
   DropdownMenu,
@@ -56,10 +55,13 @@ const navItems: NavItem[] = [
 const Header: React.FC = () => {
 
   const location = useLocation();
+
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState<string | null>(null);
   const [scrolled, setScrolled] = useState(false);
   const [openMenu, setOpenMenu] = useState<string | null>(null);
-  const timerRef = useRef<any>(null);
+
+  const timerRef = useRef<NodeJS.Timeout | null>(null);
 
   const logo =
     "https://res.cloudinary.com/ddibq0tya/image/upload/v1771404636/ChatGPT_Image_Feb_18_2026_02_20_16_PM_dtmwyu.png";
@@ -72,6 +74,7 @@ const Header: React.FC = () => {
 
   useEffect(() => {
     setIsMenuOpen(false);
+    setMobileOpen(null);
   }, [location.pathname]);
 
   const isLinkActive = (item: NavItem): boolean => {
@@ -81,18 +84,16 @@ const Header: React.FC = () => {
   };
 
   const openNow = (name: string) => {
-    clearTimeout(timerRef.current);
+    if (timerRef.current) clearTimeout(timerRef.current);
     setOpenMenu(name);
   };
 
   const closeLater = () => {
-    timerRef.current = setTimeout(() => {
-      setOpenMenu(null);
-    }, 120);
+    timerRef.current = setTimeout(() => setOpenMenu(null), 120);
   };
 
   const RenderDropdownItems = (items: NavItem[]) =>
-    items.map((item) => {
+    items.map(item => {
 
       if (item.dropdown) {
         return (
@@ -122,27 +123,29 @@ const Header: React.FC = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-background/80 backdrop-blur-xl shadow-lg" : "bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
+          ? "bg-background/80 backdrop-blur-xl shadow-lg"
+          : "bg-transparent"
         }`}
     >
       <div className="container mx-auto px-6">
 
-        {/* 🔥 increased navbar height slightly for big logo */}
-        <div className="flex items-center justify-between h-24">
+        {/* NAVBAR */}
+        <div className="flex items-center justify-between h-20 lg:h-24">
 
-          {/* ✅ BIGGER LOGO */}
+          {/* LOGO */}
           <Link to="/" className="flex items-center">
             <img
               src={logo}
-              alt="OGS Chennai Logo"
-              className="h-16 lg:h-20 w-auto object-contain"
+              alt="Logo"
+              className="h-14 lg:h-20 w-auto object-contain"
             />
           </Link>
 
-          {/* ================= DESKTOP ================= */}
+          {/* DESKTOP */}
           <nav className="hidden lg:flex items-center gap-10">
 
-            {navItems.map((item) => {
+            {navItems.map(item => {
 
               const active = isLinkActive(item);
 
@@ -157,7 +160,9 @@ const Header: React.FC = () => {
                       <div
                         onMouseEnter={() => openNow(item.name)}
                         onMouseLeave={closeLater}
-                        className={`flex items-center gap-1 cursor-pointer text-sm font-bold uppercase tracking-widest py-2 ${active ? "text-primary" : "text-foreground/80 hover:text-primary"
+                        className={`flex items-center gap-1 cursor-pointer text-sm font-bold uppercase tracking-widest py-2 ${active
+                            ? "text-primary"
+                            : "text-foreground/80 hover:text-primary"
                           }`}
                       >
                         {item.name}
@@ -181,7 +186,9 @@ const Header: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.path || "#"}
-                  className={`text-sm font-bold uppercase tracking-widest py-2 ${active ? "text-primary" : "text-foreground/80 hover:text-primary"
+                  className={`text-sm font-bold uppercase tracking-widest py-2 ${active
+                      ? "text-primary"
+                      : "text-foreground/80 hover:text-primary"
                     }`}
                 >
                   {item.name}
@@ -190,10 +197,8 @@ const Header: React.FC = () => {
             })}
           </nav>
 
-          {/* RIGHT SIDE */}
+          {/* DESKTOP CTA */}
           <div className="hidden lg:flex items-center gap-4">
-            {/* <ModeToggle /> */}
-
             <Link
               to="/become-member"
               className="px-6 py-2 rounded-full font-bold text-sm bg-primary text-white flex items-center gap-2"
@@ -212,16 +217,98 @@ const Header: React.FC = () => {
 
         </div>
 
-        {/* ================= MOBILE ================= */}
+        {/* MOBILE MENU */}
         {isMenuOpen && (
-          <div className="lg:hidden p-6 bg-white dark:bg-card border-t">
-            <div className="flex flex-col gap-4">
-              {navItems.map(item =>
-                item.path
-                  ? <Link key={item.name} to={item.path}>{item.name}</Link>
-                  : <div key={item.name} className="font-bold">{item.name}</div>
-              )}
+          <div className="lg:hidden bg-white dark:bg-card border-t shadow-xl">
+
+            <div className="flex flex-col p-6 gap-2">
+
+              {navItems.map(item => {
+
+                if (!item.dropdown) {
+                  return (
+                    <Link
+                      key={item.name}
+                      to={item.path || "#"}
+                      className="py-3 font-semibold border-b"
+                    >
+                      {item.name}
+                    </Link>
+                  );
+                }
+
+                return (
+                  <div key={item.name} className="border-b">
+
+                    <button
+                      onClick={() =>
+                        setMobileOpen(
+                          mobileOpen === item.name ? null : item.name
+                        )
+                      }
+                      className="w-full flex justify-between items-center py-3 font-semibold"
+                    >
+                      {item.name}
+                      <ChevronDown
+                        className={`transition ${mobileOpen === item.name ? "rotate-180" : ""
+                          }`}
+                      />
+                    </button>
+
+                    {mobileOpen === item.name && (
+                      <div className="pl-4 pb-3 flex flex-col gap-2">
+
+                        {item.dropdown.map(sub => {
+
+                          if (sub.dropdown) {
+                            return (
+                              <div key={sub.name}>
+                                <div className="font-semibold text-sm text-muted-foreground">
+                                  {sub.name}
+                                </div>
+
+                                <div className="pl-3 mt-1 flex flex-col gap-2">
+                                  {sub.dropdown.map(inner => (
+                                    <Link
+                                      key={inner.name}
+                                      to={inner.path || "#"}
+                                      className="text-sm py-1"
+                                    >
+                                      {inner.name}
+                                    </Link>
+                                  ))}
+                                </div>
+                              </div>
+                            );
+                          }
+
+                          return (
+                            <Link
+                              key={sub.name}
+                              to={sub.path || "#"}
+                              className="text-sm py-1"
+                            >
+                              {sub.name}
+                            </Link>
+                          );
+                        })}
+
+                      </div>
+                    )}
+
+                  </div>
+                );
+              })}
+
+              <Link
+                to="/become-member"
+                className="mt-4 px-6 py-3 rounded-full font-bold text-center bg-primary text-white"
+              >
+                Become a Member
+              </Link>
+
             </div>
+
           </div>
         )}
 
