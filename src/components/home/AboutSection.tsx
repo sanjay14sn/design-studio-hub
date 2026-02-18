@@ -115,7 +115,7 @@ const AboutSection = () => {
                 {
                   icon: Target,
                   title: "Our Mission",
-                  desc: "To promote research, develop clinical guidelines, support practitioner training, and ensure patient safety while building a strong academic community."
+                  desc: "To promote research, develop clinical guidelines, support practitioner training, and ensure patient safety while building a strong academic Society."
                 }
               ].map((item, i) => (
                 <motion.div

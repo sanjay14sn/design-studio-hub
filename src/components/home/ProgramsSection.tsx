@@ -59,7 +59,7 @@ const MembershipSection = () => {
             CGSI Membership <span className="text-accent">Benefits</span>
           </h2>
           <p className="text-lg text-muted-foreground opacity-80">
-            Join a community of experts.
+            Join a Society of experts.
           </p>
         </div>
 

@@ -124,8 +124,8 @@ const Header: React.FC = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-          ? "bg-background/80 backdrop-blur-xl shadow-lg"
-          : "bg-transparent"
+        ? "bg-background/80 backdrop-blur-xl shadow-lg"
+        : "bg-transparent"
         }`}
     >
       <div className="container mx-auto px-6">
@@ -161,8 +161,8 @@ const Header: React.FC = () => {
                         onMouseEnter={() => openNow(item.name)}
                         onMouseLeave={closeLater}
                         className={`flex items-center gap-1 cursor-pointer text-sm font-bold uppercase tracking-widest py-2 ${active
-                            ? "text-primary"
-                            : "text-foreground/80 hover:text-primary"
+                          ? "text-primary"
+                          : "text-foreground/80 hover:text-primary"
                           }`}
                       >
                         {item.name}
@@ -187,8 +187,8 @@ const Header: React.FC = () => {
                   key={item.name}
                   to={item.path || "#"}
                   className={`text-sm font-bold uppercase tracking-widest py-2 ${active
-                      ? "text-primary"
-                      : "text-foreground/80 hover:text-primary"
+                    ? "text-primary"
+                    : "text-foreground/80 hover:text-primary"
                     }`}
                 >
                   {item.name}

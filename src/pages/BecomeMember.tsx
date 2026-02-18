@@ -40,7 +40,7 @@ const BecomeMember = () => {
                         <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/10 text-primary mb-6 border border-primary/20">
                             <UserPlus className="w-4 h-4" />
                             <span className="text-sm font-semibold uppercase tracking-wider">
-                                Join Our Community
+                                Join Our Society
                             </span>
                         </div>
 
@@ -50,7 +50,7 @@ const BecomeMember = () => {
 
                         <p className="text-lg text-muted-foreground">
                             Join the Cosmetic Gynecology Society of India (CGSI) and become part of a
-                            national academic community committed to advancing excellence,
+                            national academic Society committed to advancing excellence,
                             innovation, and education in cosmetic gynecology.
                         </p>
 

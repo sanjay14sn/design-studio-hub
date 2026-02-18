@@ -105,23 +105,23 @@ const Index = () => {
             {/* Added a wrapper with z-index to ensure it sits above any layout backgrounds */}
 
 
-            <FadeIn delay={0.3}>
-              <EventsSection />
-            </FadeIn>
 
             <FadeIn delay={0.4}>
               <AboutSection />
             </FadeIn>
 
-            <FadeIn delay={0.5}>
+            <FadeIn delay={0.3}>
               <PresidentMessage />
             </FadeIn>
             <FadeIn delay={0.2}>
               <PreviousEvents />
             </FadeIn>
 
-            <FadeIn delay={0.7}>
+            <FadeIn delay={0.3}>
               <TeamSection />
+            </FadeIn>
+            <FadeIn delay={0.3}>
+              <EventsSection />
             </FadeIn>
 
             {/* 2. Insert Video Section here */}

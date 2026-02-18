@@ -176,7 +176,7 @@ const About = () => {
 
                   <p className="text-lg text-primary-foreground/90 leading-relaxed">
                     To enhance maternal and intimate care through continuous education,
-                    rigorous research, and extensive community outreach. We strive to
+                    rigorous research, and extensive Society outreach. We strive to
                     advocate for women’s health and promote safe, ethical birth and
                     aesthetic practices across the region.
                   </p>

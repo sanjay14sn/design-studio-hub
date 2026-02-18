@@ -55,7 +55,7 @@ const Programs = () => {
             </h1>
 
             <p className="text-lg text-muted-foreground">
-              Regular educational programs and community initiatives.
+              Regular educational programs and Society initiatives.
             </p>
           </div>
         </div>
