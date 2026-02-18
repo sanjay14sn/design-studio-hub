@@ -14,6 +14,7 @@ import ProgramsSection from "@/components/home/ProgramsSection";
 import PreviousEvents from "@/components/home/PreviousEvents";
 import ScrollToTop from "@/components/ui/ScrollToTop";
 import GynecologySection from "@/components/home/GynecologySection";
+import VideoSection from "@/components/home/VideoSection"; // 1. Import the component
 
 const SplashScreen = () => (
   <motion.div
@@ -78,9 +79,7 @@ const Index = () => {
             </FadeIn>
 
             {/* Added a wrapper with z-index to ensure it sits above any layout backgrounds */}
-            <FadeIn delay={0.2} className="relative z-10">
-              <PreviousEvents />
-            </FadeIn>
+
 
             <FadeIn delay={0.3}>
               <EventsSection />
@@ -93,17 +92,24 @@ const Index = () => {
             <FadeIn delay={0.5}>
               <PresidentMessage />
             </FadeIn>
-
+            <FadeIn delay={0.2}>
+              <PreviousEvents />
+            </FadeIn>
 
             <FadeIn delay={0.7}>
               <TeamSection />
             </FadeIn>
 
-
+            {/* 2. Insert Video Section here */}
+            <FadeIn delay={0.75}>
+              <VideoSection />
+            </FadeIn>
 
             <FadeIn delay={0.8}>
               <ProgramsSection />
             </FadeIn>
+
+
 
 
             <ScrollToTop />

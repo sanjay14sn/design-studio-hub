@@ -1,268 +1,111 @@
 "use client";
 
-import React, { useRef, useEffect, useState, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
 
-const events = [
+const EVENTS = [
   {
     id: 1,
-    title: "High Risk Pregnancy",
-    date: "11th May 2025",
-    image: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80",
-    pdfLink: "#",
+    title: "CGCON 2024",
+    category: "1st Cosmetic Gynaecology Conference in South India",
+    date: "Day 1",
+    image: "https://res.cloudinary.com/ddibq0tya/image/upload/v1771401917/IMG_2891_2_ng3esf.jpg",
   },
   {
     id: 2,
-    title: "CME Program",
-    description: "SOUTHERN INDIA",
-    date: "13th April 2025",
-    image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=800&q=80",
-    pdfLink: "#",
+    title: "CGCON 2024",
+    category: "1st Cosmetic Gynaecology Conference in South India",
+    date: "Day 2",
+    image: "https://res.cloudinary.com/ddibq0tya/image/upload/v1771403453/IMG_2892_djcz57.jpg",
   },
   {
     id: 3,
-    title: "Anemia Screening Camp",
-    description: "39 detected as anemic; 42 provided with ABHA IDs.",
-    date: "Ongoing 2025",
-    image: "https://images.unsplash.com/photo-1584515606965-300483849925?auto=format&fit=crop&w=800&q=80",
-    pdfLink: "#",
+    title: "CGCON 2025",
+    category: "2nd Cosmetic Gynaecology Conference in South India",
+    date: "Day 1",
+    image: "https://res.cloudinary.com/ddibq0tya/image/upload/v1771403826/IMG_1490_li5pye.jpg",
   },
   {
     id: 4,
-    title: "Anemia Screening Camp",
-    description: "39 detected as anemic; 42 provided with ABHA IDs.",
-    date: "Ongoing 2025",
-    image: "https://images.unsplash.com/photo-1584515606965-300483849925?auto=format&fit=crop&w=800&q=80",
-    pdfLink: "#",
-  },
-  {
-    id: 5,
-    title: "Anemia Screening Camp",
-    description: "39 detected as anemic; 42 provided with ABHA IDs.",
-    date: "Ongoing 2025",
-    image: "https://images.unsplash.com/photo-1584515606965-300483849925?auto=format&fit=crop&w=800&q=80",
-    pdfLink: "#",
+    title: "CGCON 2025",
+    category: "2nd Cosmetic Gynaecology Conference in South India",
+    date: "Day 2",
+    image: "https://res.cloudinary.com/ddibq0tya/image/upload/v1771403856/DSC07741_zmueoi.jpg",
   },
 ];
 
-const PreviousEvents = () => {
-  const scrollRef = useRef(null);
-  const rafRef = useRef(null);
-  const [isPaused, setIsPaused] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const itemWidth = 380 + 24; // card width + gap
-  const totalItems = events.length;
-
-  // Smooth continuous auto-scroll using RAF
-  const autoScroll = useCallback(() => {
-    if (scrollRef.current && !isPaused) {
-      scrollRef.current.scrollLeft += 0.8; // Continuous smooth scroll speed
-
-      // Infinite loop logic
-      const { scrollLeft, scrollWidth, clientWidth } = scrollRef.current;
-      if (scrollLeft >= scrollWidth * 0.5) { // Halfway through duplicates
-        scrollRef.current.scrollLeft = scrollLeft - (itemWidth * totalItems);
-      }
-
-      rafRef.current = requestAnimationFrame(autoScroll);
-    }
-  }, [isPaused, itemWidth, totalItems]);
-
-  // Duplicate items for seamless infinite scroll
-  const infiniteEvents = [...events, ...events, ...events];
-
-  useEffect(() => {
-    // Start auto-scroll
-    rafRef.current = requestAnimationFrame(autoScroll);
-
-    return () => {
-      if (rafRef.current) {
-        cancelAnimationFrame(rafRef.current);
-      }
-    };
-  }, [autoScroll]);
-
-  // Pause/Resume handlers
-  const handleMouseEnter = () => {
-    setIsPaused(true);
-    if (rafRef.current) {
-      cancelAnimationFrame(rafRef.current);
-    }
-  };
-
-  const handleMouseLeave = () => {
-    setIsPaused(false);
-    rafRef.current = requestAnimationFrame(autoScroll);
-  };
-
-  const scrollToIndex = (index) => {
-    if (scrollRef.current) {
-      scrollRef.current.scrollTo({
-        left: index * itemWidth,
-        behavior: 'smooth'
-      });
-    }
-  };
-
+export default function PreviousEvents() {
   return (
-    <section className="py-20 px-6 bg-background relative z-10">
-      <div className="max-w-7xl mx-auto">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-10 gap-4">
-          <div>
-            <div className="flex items-center gap-2 mb-2">
-              <div className="h-[2px] w-8 bg-accent" />
-              <span className="text-primary text-xs font-bold tracking-widest uppercase">Archive</span>
-            </div>
-            <h2 className="text-3xl md:text-5xl font-serif font-bold text-foreground">
-              Our <span className="text-primary">Previous</span> Events
-            </h2>
-          </div>
+    <section className="py-20 bg-white">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8">
 
-          <div className="flex gap-3">
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToIndex(Math.max(0, currentIndex - 1))}
-              className="p-3 rounded-full border border-secondary text-primary hover:bg-white hover:shadow-md transition-all duration-200"
-              aria-label="Previous event"
-            >
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M15 19l-7-7 7-7" />
-              </svg>
-            </motion.button>
-            <motion.button
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-              onClick={() => scrollToIndex(currentIndex + 1)}
-              className="p-3 rounded-full bg-primary text-white shadow-md hover:shadow-lg transition-all duration-200"
-              aria-label="Next event"
-            >
-              <svg width="20" height="20" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-                <path d="M9 5l7 7-7 7" />
-              </svg>
-            </motion.button>
-          </div>
+        {/* HEADER */}
+        <div className="mb-16 text-left border-l-4 border-blue-600 pl-6">
+          <p className="text-blue-600 text-xs font-black uppercase tracking-widest mb-2">
+            Institutional Archive
+          </p>
+          <h2 className="text-4xl md:text-5xl font-serif text-slate-900">
+            History in <span className="italic text-slate-500">Motion.</span>
+          </h2>
         </div>
 
-        {/* Indicators */}
-        <div className="flex justify-center mb-8 gap-2">
-          {events.map((_, index) => (
-            <motion.button
-              key={index}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${currentIndex === index ? 'bg-primary scale-125 shadow-md' : 'bg-gray-300 hover:bg-gray-400'
-                }`}
-              onClick={() => scrollToIndex(index)}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-              aria-label={`Go to event ${index + 1}`}
-            />
-          ))}
-        </div>
+        {/* GALLERY GRID */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-12">
+          {EVENTS.map((e) => (
+            <div key={e.id} className="group cursor-pointer">
 
-        <div
-          ref={scrollRef}
-          className="flex gap-6 overflow-hidden" // Changed from overflow-x-auto to overflow-hidden
-          style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
-          onMouseEnter={handleMouseEnter}
-          onMouseLeave={handleMouseLeave}
-          onTouchStart={handleMouseEnter}
-          onTouchEnd={handleMouseLeave}
-        >
-          {infiniteEvents.map((event, index) => (
-            <motion.div
-              key={`${event.id}-${index}`}
-              className="min-w-[300px] md:min-w-[380px] flex-shrink-0"
-              initial={{ opacity: 0.7, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.6 }}
-              whileHover={{ scale: 1.02, zIndex: 10 }}
-            >
-              <div className="group relative h-[480px] rounded-3xl overflow-hidden bg-muted shadow-xl hover:shadow-2xl transition-all duration-500 cursor-grab active:cursor-grabbing">
+              {/* IMAGE CONTAINER - Locked to 16:9 Aspect Ratio */}
+              <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-slate-100 ring-1 ring-slate-200">
                 <img
-                  src={event.image}
-                  alt={event.title}
-                  className="absolute inset-0 w-full h-full object-cover opacity-80 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700"
-                  onError={(e) => {
-                    e.target.src = 'https://images.unsplash.com/photo-1551601651-2a8555f1a136?q=80&w=800';
-                  }}
+                  src={e.image}
+                  alt={e.title}
+                  /* Using object-contain ensures the FULL image is visible. 
+                     The bg-slate-100 acts as a letterbox if the photo is a different shape.
+                  */
+                  className="w-full h-full object-contain p-2 transition-transform duration-500 group-hover:scale-[1.02]"
+                  loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-muted-foreground/90 via-transparent to-transparent" />
+              </div>
 
-                <div className="absolute bottom-0 left-0 right-0 p-6 text-white">
-                  <span className="text-secondary text-[10px] font-bold tracking-tighter uppercase">{event.date}</span>
-                  <h3 className="text-xl md:text-2xl font-bold mt-1 mb-4 leading-tight">{event.title}</h3>
-                  {event.description && (
-                    <p className="text-sm opacity-90 mb-6 leading-relaxed line-clamp-2">{event.description}</p>
-                  )}
-                  <a
-                    href={event.pdfLink}
-                    className="flex items-center justify-center w-full py-3 bg-white/90 backdrop-blur-sm text-primary rounded-xl font-bold text-sm hover:bg-white hover:shadow-lg hover:scale-[1.02] transition-all duration-300 group-hover:translate-y-[-2px]"
-                    target="_blank"
-                    rel="noopener noreferrer"
+              {/* CONTENT AREA - Moved below image for full visibility */}
+              <div className="mt-6 flex justify-between items-start">
+                <div className="space-y-2">
+                  <div className="flex items-center gap-3">
+                    <span className="text-[10px] font-bold uppercase tracking-tighter bg-slate-100 text-slate-600 px-2 py-0.5 rounded">
+                      {e.category}
+                    </span>
+                    <span className="text-xs font-medium text-blue-600">
+                      {e.date}
+                    </span>
+                  </div>
+                  <h3 className="text-xl md:text-2xl font-bold text-slate-900 group-hover:text-blue-600 transition-colors">
+                    {e.title}
+                  </h3>
+                </div>
+
+                <div className="hidden sm:flex w-12 h-12 items-center justify-center rounded-full border border-slate-200 group-hover:bg-blue-600 group-hover:text-white transition-all duration-300">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none" viewBox="0 0 24 24"
+                    strokeWidth={2}
+                    stroke="currentColor"
+                    className="w-5 h-5"
                   >
-                    VIEW EVENT PDF →
-                  </a>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M4.5 19.5l15-15m0 0H8.25m11.25 0v11.25" />
+                  </svg>
                 </div>
               </div>
-            </motion.div>
+            </div>
           ))}
         </div>
 
-        {/* Scroll Down Indicator */}
-        <motion.div
-          className="flex justify-center mt-12"
-          initial={{ opacity: 0, y: -10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.5, duration: 0.6 }}
-        >
-          <button
-            onClick={() => {
-              const nextSection = document.querySelector('[data-section="events"]') ||
-                document.querySelector('section:nth-of-type(3)');
-              if (nextSection) {
-                nextSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-              } else {
-                window.scrollBy({ top: window.innerHeight * 0.8, behavior: 'smooth' });
-              }
-            }}
-            className="group flex flex-col items-center gap-2 text-primary hover:text-accent transition-colors duration-300"
-            aria-label="Scroll to next section"
-          >
-            <span className="text-xs font-bold uppercase tracking-widest">Explore More</span>
-            <motion.div
-              animate={{ y: [0, 8, 0] }}
-              transition={{ repeat: Infinity, duration: 1.5, ease: "easeInOut" }}
-              className="p-3 rounded-full border-2 border-current group-hover:bg-primary/5 transition-all"
-            >
-              <svg
-                width="20"
-                height="20"
-                fill="none"
-                stroke="currentColor"
-                strokeWidth="2.5"
-                viewBox="0 0 24 24"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <path d="M12 5v14M19 12l-7 7-7-7" />
-              </svg>
-            </motion.div>
+        {/* FOOTER */}
+        <div className="mt-20 pt-8 border-t border-slate-100 flex justify-center">
+          <button className="flex items-center gap-2 text-slate-400 hover:text-blue-600 font-semibold transition-colors">
+            <span>View full archive catalog</span>
+            <span className="text-xl">→</span>
           </button>
-        </motion.div>
+        </div>
       </div>
-
-      <style jsx>{`
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .line-clamp-2 {
-          display: -webkit-box;
-          -webkit-line-clamp: 2;
-          -webkit-box-orient: vertical;
-          overflow: hidden;
-        }
-      `}</style>
     </section>
   );
-};
-
-export default PreviousEvents;
+}

@@ -21,7 +21,7 @@ const teamMembers = [
     id: 3,
     name: "Dr. Anitha Prem",
     role: "Treasurer",
-    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&w=400&q=80"
+    image: "https://res.cloudinary.com/ddibq0tya/image/upload/v1771399674/WhatsApp_Image_2026-02-10_at_12.54.13_PM_wlraqx.jpg"
   },
 ];
 

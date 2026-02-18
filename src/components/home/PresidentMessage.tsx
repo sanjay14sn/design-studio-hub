@@ -26,13 +26,10 @@ const PresidentMessage = () => {
               {/* Large Quote Mark */}
               <Quote className="absolute -top-6 -left-6 w-16 h-16 opacity-20 text-secondary" />
               <blockquote className="text-lg leading-relaxed pl-8 border-l-4 italic text-muted-foreground border-primary">
-                "It is indeed satisfying, rather gratifying that in the 91st year of OGSSI
-                I am given the onerous task of leading it from the front! Thanks to all members,
-                seniors and past EC members for having reposed their faith in me."
+                "The Cosmetic Gynecology Society of India (CGSI) has been formed with a shared vision to develop this evolving subspecialty in a structured, ethical, and evidence-based manner."
                 <br />
                 <br />
-                "1934 saw the genesis of OGSSI—the first official OG professional body in India.
-                It has been the nest for many doyens and stalwarts over the years."
+                "The primary goal of the society is to promote scientific education, formulate clinical guidelines, encourage research, and create a strong academic and professional platform for clinicians who are practicing or aspiring to practice cosmetic gynecology in India, while prioritizing patient safety and ethical practice."
               </blockquote>
             </div>
 
@@ -73,7 +70,7 @@ const PresidentMessage = () => {
               {/* Added aspect-square or specific height with better object fit */}
               <div className="rounded-[3rem] overflow-hidden shadow-2xl border-8 border-white bg-white">
                 <img
-                  src="/message1.jpg"
+                  src="https://res.cloudinary.com/ddibq0tya/image/upload/v1771400393/DOT01099_2_gtshvq.jpg"
                   alt="Presidential Portrait"
                   className="w-full h-[500px] lg:h-[600px] object-cover object-top"
                   onError={(e) => {
