@@ -38,8 +38,7 @@ const Footer = () => {
               </Link>
 
               <p className="text-primary-foreground/70 leading-relaxed">
-                The Obstetric and Gynaecological Society of Southern India –
-                Advancing women's healthcare since 1934.
+                The Cosmetic Gynecology Society of India (CGSI)
               </p>
 
               <div className="flex gap-4">

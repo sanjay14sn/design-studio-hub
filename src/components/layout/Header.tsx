@@ -53,7 +53,6 @@ const navItems: NavItem[] = [
 ];
 
 const Header: React.FC = () => {
-
   const location = useLocation();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -62,9 +61,6 @@ const Header: React.FC = () => {
   const [openMenu, setOpenMenu] = useState<string | null>(null);
 
   const timerRef = useRef<NodeJS.Timeout | null>(null);
-
-  const logo =
-    "https://res.cloudinary.com/ddibq0tya/image/upload/v1771404636/ChatGPT_Image_Feb_18_2026_02_20_16_PM_dtmwyu.png";
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -79,7 +75,7 @@ const Header: React.FC = () => {
 
   const isLinkActive = (item: NavItem): boolean => {
     if (item.path && location.pathname === item.path) return true;
-    if (item.dropdown) return item.dropdown.some(sub => isLinkActive(sub));
+    if (item.dropdown) return item.dropdown.some((sub) => isLinkActive(sub));
     return false;
   };
 
@@ -93,15 +89,13 @@ const Header: React.FC = () => {
   };
 
   const RenderDropdownItems = (items: NavItem[]) =>
-    items.map(item => {
-
+    items.map((item) => {
       if (item.dropdown) {
         return (
           <DropdownMenuSub key={item.name}>
             <DropdownMenuSubTrigger className="px-3 py-2 text-sm font-semibold rounded-lg hover:bg-primary/10">
               {item.name}
             </DropdownMenuSubTrigger>
-
             <DropdownMenuSubContent className="p-2">
               {RenderDropdownItems(item.dropdown)}
             </DropdownMenuSubContent>
@@ -124,29 +118,23 @@ const Header: React.FC = () => {
   return (
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled
-        ? "bg-background/80 backdrop-blur-xl shadow-lg"
-        : "bg-transparent"
+          ? "bg-background/80 backdrop-blur-xl shadow-lg border-b"
+          : "bg-transparent"
         }`}
     >
       <div className="container mx-auto px-6">
-
-        {/* NAVBAR */}
         <div className="flex items-center justify-between h-20 lg:h-24">
 
-          {/* LOGO */}
-          <Link to="/" className="flex items-center">
-            <img
-              src={logo}
-              alt="Logo"
-              className="h-14 lg:h-20 w-auto object-contain"
-            />
+          {/* TEXT LOGO INSTEAD OF IMAGE */}
+          <Link to="/" className="flex items-center group">
+            <span className="text-2xl lg:text-3xl font-black tracking-tighter text-primary group-hover:opacity-80 transition-opacity">
+              CGSI
+            </span>
           </Link>
 
-          {/* DESKTOP */}
-          <nav className="hidden lg:flex items-center gap-10">
-
-            {navItems.map(item => {
-
+          {/* DESKTOP NAVIGATION */}
+          <nav className="hidden lg:flex items-center gap-8">
+            {navItems.map((item) => {
               const active = isLinkActive(item);
 
               if (item.dropdown) {
@@ -160,13 +148,13 @@ const Header: React.FC = () => {
                       <div
                         onMouseEnter={() => openNow(item.name)}
                         onMouseLeave={closeLater}
-                        className={`flex items-center gap-1 cursor-pointer text-sm font-bold uppercase tracking-widest py-2 ${active
-                          ? "text-primary"
-                          : "text-foreground/80 hover:text-primary"
+                        className={`flex items-center gap-1 cursor-pointer text-[13px] font-bold uppercase tracking-widest py-2 transition-colors ${active
+                            ? "text-primary border-b-2 border-primary"
+                            : "text-foreground/80 hover:text-primary"
                           }`}
                       >
                         {item.name}
-                        <ChevronDown className="w-4 h-4" />
+                        <ChevronDown className="w-3 h-3" />
                       </div>
                     </DropdownMenuTrigger>
 
@@ -186,9 +174,9 @@ const Header: React.FC = () => {
                 <Link
                   key={item.name}
                   to={item.path || "#"}
-                  className={`text-sm font-bold uppercase tracking-widest py-2 ${active
-                    ? "text-primary"
-                    : "text-foreground/80 hover:text-primary"
+                  className={`text-[13px] font-bold uppercase tracking-widest py-2 transition-colors ${active
+                      ? "text-primary border-b-2 border-primary"
+                      : "text-foreground/80 hover:text-primary"
                     }`}
                 >
                   {item.name}
@@ -201,36 +189,33 @@ const Header: React.FC = () => {
           <div className="hidden lg:flex items-center gap-4">
             <Link
               to="/become-member"
-              className="px-6 py-2 rounded-full font-bold text-sm bg-primary text-white flex items-center gap-2"
+              className="px-6 py-2.5 rounded-full font-bold text-sm bg-primary text-white hover:shadow-lg hover:shadow-primary/20 transition-all flex items-center gap-2"
             >
               Become a Member <ArrowRight size={16} />
             </Link>
           </div>
 
-          {/* MOBILE BUTTON */}
+          {/* MOBILE TOGGLE */}
           <button
-            className="lg:hidden p-2 bg-primary/10 rounded-xl"
-            onClick={() => setIsMenuOpen(p => !p)}
+            className="lg:hidden p-2 bg-primary/10 rounded-xl text-primary"
+            onClick={() => setIsMenuOpen((p) => !p)}
           >
             {isMenuOpen ? <X /> : <Menu />}
           </button>
-
         </div>
 
         {/* MOBILE MENU */}
         {isMenuOpen && (
-          <div className="lg:hidden bg-white dark:bg-card border-t shadow-xl">
-
+          <div className="lg:hidden bg-background border-t shadow-2xl absolute left-0 right-0 top-full max-h-[80vh] overflow-y-auto">
             <div className="flex flex-col p-6 gap-2">
-
-              {navItems.map(item => {
-
+              {navItems.map((item) => {
                 if (!item.dropdown) {
                   return (
                     <Link
                       key={item.name}
                       to={item.path || "#"}
-                      className="py-3 font-semibold border-b"
+                      className={`py-4 font-bold border-b text-sm uppercase tracking-wide ${isLinkActive(item) ? "text-primary" : ""
+                        }`}
                     >
                       {item.name}
                     </Link>
@@ -239,40 +224,35 @@ const Header: React.FC = () => {
 
                 return (
                   <div key={item.name} className="border-b">
-
                     <button
                       onClick={() =>
-                        setMobileOpen(
-                          mobileOpen === item.name ? null : item.name
-                        )
+                        setMobileOpen(mobileOpen === item.name ? null : item.name)
                       }
-                      className="w-full flex justify-between items-center py-3 font-semibold"
+                      className={`w-full flex justify-between items-center py-4 font-bold text-sm uppercase tracking-wide ${isLinkActive(item) ? "text-primary" : ""
+                        }`}
                     >
                       {item.name}
                       <ChevronDown
-                        className={`transition ${mobileOpen === item.name ? "rotate-180" : ""
+                        className={`transition-transform duration-300 ${mobileOpen === item.name ? "rotate-180" : ""
                           }`}
                       />
                     </button>
 
                     {mobileOpen === item.name && (
-                      <div className="pl-4 pb-3 flex flex-col gap-2">
-
-                        {item.dropdown.map(sub => {
-
+                      <div className="pl-4 pb-4 flex flex-col gap-3">
+                        {item.dropdown.map((sub) => {
                           if (sub.dropdown) {
                             return (
-                              <div key={sub.name}>
-                                <div className="font-semibold text-sm text-muted-foreground">
+                              <div key={sub.name} className="mt-2">
+                                <div className="font-bold text-[12px] uppercase text-muted-foreground mb-2">
                                   {sub.name}
                                 </div>
-
-                                <div className="pl-3 mt-1 flex flex-col gap-2">
-                                  {sub.dropdown.map(inner => (
+                                <div className="pl-3 flex flex-col gap-3 border-l-2 border-primary/20">
+                                  {sub.dropdown.map((inner) => (
                                     <Link
                                       key={inner.name}
                                       to={inner.path || "#"}
-                                      className="text-sm py-1"
+                                      className="text-sm font-medium py-1"
                                     >
                                       {inner.name}
                                     </Link>
@@ -286,32 +266,27 @@ const Header: React.FC = () => {
                             <Link
                               key={sub.name}
                               to={sub.path || "#"}
-                              className="text-sm py-1"
+                              className="text-sm font-medium py-1"
                             >
                               {sub.name}
                             </Link>
                           );
                         })}
-
                       </div>
                     )}
-
                   </div>
                 );
               })}
 
               <Link
                 to="/become-member"
-                className="mt-4 px-6 py-3 rounded-full font-bold text-center bg-primary text-white"
+                className="mt-6 px-6 py-4 rounded-xl font-bold text-center bg-primary text-white shadow-lg"
               >
                 Become a Member
               </Link>
-
             </div>
-
           </div>
         )}
-
       </div>
     </header>
   );
